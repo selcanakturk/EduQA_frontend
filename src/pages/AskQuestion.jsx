@@ -117,25 +117,25 @@ export default function AskQuestion() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow animate-fade-in">
-      <h1 className="text-3xl font-bold text-gray-900">{t("question.ask")}</h1>
-      <p className="mt-2 text-gray-600">
+    <div className="mx-auto max-w-3xl rounded-lg bg-white p-4 md:p-6 shadow animate-fade-in">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{t("question.ask")}</h1>
+      <p className="mt-2 text-sm md:text-base text-gray-600">
         {t("question.askDescription")}
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 md:mt-6 space-y-4 md:space-y-5">
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
             Başlık
           </label>
           <input
             type="text"
-            className="w-full rounded border border-gray-300 px-3 py-2"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm md:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none"
             placeholder="Örn: React ile form doğrulama nasıl yapılır?"
             {...register("title")}
           />
           {errors.title && (
-            <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>
+            <p className="mt-1 text-xs md:text-sm text-red-500">{errors.title.message}</p>
           )}
         </div>
 
@@ -149,10 +149,10 @@ export default function AskQuestion() {
               setValue("content", value);
             }}
             placeholder="Sorunu detaylandır, denediğin adımları ve beklediğin sonucu belirt. Markdown formatında yazabilirsin: **kalın**, *italik*, `kod`, ```kod bloğu```"
-            minHeight="300px"
+            minHeight="250px"
           />
           {errors.content && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-xs md:text-sm text-red-500">
               {errors.content.message}
             </p>
           )}
@@ -164,7 +164,7 @@ export default function AskQuestion() {
           </label>
           <input
             type="text"
-            className="w-full rounded border border-gray-300 px-3 py-2"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm md:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none"
             placeholder="react, javascript, nodejs"
             {...register("tags")}
           />
@@ -185,25 +185,26 @@ export default function AskQuestion() {
             />
             <label
               htmlFor="file-input"
-              className="flex cursor-pointer items-center gap-2 rounded border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 md:px-4 md:py-2 text-xs md:text-sm font-medium text-gray-700 transition hover:bg-gray-100"
             >
-              <FiPaperclip />
-              Dosya Seç (En fazla 5, 5MB'a kadar)
+              <FiPaperclip className="h-4 w-4" />
+              <span className="hidden sm:inline">Dosya Seç (En fazla 5, 5MB'a kadar)</span>
+              <span className="sm:hidden">Dosya Seç</span>
             </label>
             {selectedFiles.length > 0 && (
               <div className="space-y-2">
                 {selectedFiles.map((file, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between rounded border border-gray-200 bg-gray-50 px-3 py-2"
+                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 md:px-3 md:py-2"
                   >
-                    <span className="text-sm text-gray-700">{file.name}</span>
+                    <span className="text-xs md:text-sm text-gray-700 truncate flex-1 mr-2">{file.name}</span>
                     <button
                       type="button"
                       onClick={() => removeFile(index)}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 flex-shrink-0"
                     >
-                      <FiX />
+                      <FiX className="h-4 w-4" />
                     </button>
                   </div>
                 ))}
@@ -218,7 +219,7 @@ export default function AskQuestion() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full rounded bg-blue-600 py-3 text-lg font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
+          className="w-full rounded-lg bg-blue-600 py-2.5 md:py-3 text-base md:text-lg font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50 active:scale-95"
         >
           {isLoading ? "Gönderiliyor..." : "Soruyu Yayınla"}
         </button>

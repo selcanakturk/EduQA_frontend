@@ -51,18 +51,17 @@ export default function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 py-6 animate-fade-in">
+    <div className="flex flex-wrap items-center justify-center gap-2 py-4 md:py-6 animate-fade-in">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={!hasPrevPage || isLoading}
-        className={`flex items-center gap-1 rounded-lg border px-4 py-2 text-sm font-semibold transition ${
-          !hasPrevPage || isLoading
+        className={`flex items-center gap-1 rounded-lg border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${!hasPrevPage || isLoading
             ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
             : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
+          }`}
       >
-        <FiChevronLeft className="h-4 w-4" />
-        {t("common.previous")}
+        <FiChevronLeft className="h-3.5 w-3.5 md:h-4 md:w-4" />
+        <span className="hidden sm:inline">{t("common.previous")}</span>
       </button>
 
       <div className="flex items-center gap-1">
@@ -71,7 +70,7 @@ export default function Pagination({
             return (
               <span
                 key={`ellipsis-${index}`}
-                className="px-2 text-gray-400"
+                className="px-1 md:px-2 text-xs md:text-sm text-gray-400"
               >
                 ...
               </span>
@@ -85,13 +84,12 @@ export default function Pagination({
               key={page}
               onClick={() => onPageChange(page)}
               disabled={isLoading}
-              className={`min-w-[40px] rounded-lg border px-3 py-2 text-sm font-semibold transition ${
-                isActive
+              className={`min-w-[32px] md:min-w-[40px] rounded-lg border px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${isActive
                   ? "border-blue-600 bg-blue-600 text-white"
                   : isLoading
-                  ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
-                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-              }`}
+                    ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
+                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                }`}
             >
               {page}
             </button>
@@ -102,17 +100,16 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={!hasNextPage || isLoading}
-        className={`flex items-center gap-1 rounded-lg border px-4 py-2 text-sm font-semibold transition ${
-          !hasNextPage || isLoading
+        className={`flex items-center gap-1 rounded-lg border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${!hasNextPage || isLoading
             ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
             : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
+          }`}
       >
-        {t("common.next")}
-        <FiChevronRight className="h-4 w-4" />
+        <span className="hidden sm:inline">{t("common.next")}</span>
+        <FiChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
       </button>
 
-      <div className="ml-4 text-sm text-gray-600">
+      <div className="ml-2 md:ml-4 text-xs md:text-sm text-gray-600">
         {t("common.page")} {currentPage} / {totalPages}
       </div>
     </div>

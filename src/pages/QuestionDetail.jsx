@@ -297,33 +297,33 @@ export default function QuestionDetail() {
             : answers;
 
     return (
-        <div className="space-y-6">
-            <div className="animate-fade-in rounded-lg bg-white p-6 shadow">
-                <div className="flex flex-wrap items-center gap-4">
+        <div className="space-y-4 md:space-y-6 px-4 md:px-0">
+            <div className="animate-fade-in rounded-lg bg-white p-4 md:p-6 shadow">
+                <div className="flex flex-wrap items-center gap-2 md:gap-4">
                     {question.solved && (
-                        <span className="flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
-                            <FiCheckCircle className="h-4 w-4" />
+                        <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm font-semibold text-green-700">
+                            <FiCheckCircle className="h-3 w-3 md:h-4 md:w-4" />
                             Çözüldü
                         </span>
                     )}
-                    <span className="rounded bg-blue-50 px-3 py-1 text-sm font-medium text-blue-600">
+                    <span className="rounded bg-blue-50 px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm font-medium text-blue-600">
                         {question.answerCount || answers.length} cevap
                     </span>
-                    <span className="text-sm text-gray-500">
-                        {new Date(question.createdAt).toLocaleString()}
+                    <span className="text-xs md:text-sm text-gray-500">
+                        {new Date(question.createdAt).toLocaleDateString("tr-TR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                     </span>
                 </div>
 
-                <h1 className="mt-4 text-3xl font-bold text-gray-900">
+                <h1 className="mt-3 md:mt-4 text-xl md:text-3xl font-bold text-gray-900 break-words">
                     {question.title}
                 </h1>
-                <div className="mt-4 text-gray-800">
+                <div className="mt-3 md:mt-4 text-sm md:text-base text-gray-800">
                     <MarkdownRenderer content={question.content} />
                 </div>
 
                 {question.attachments && question.attachments.length > 0 && (
-                    <div className="mt-4 space-y-2">
-                        <p className="text-sm font-medium text-gray-700">Ekli Dosyalar:</p>
+                    <div className="mt-3 md:mt-4 space-y-2">
+                        <p className="text-xs md:text-sm font-medium text-gray-700">Ekli Dosyalar:</p>
                         <div className="flex flex-wrap gap-2">
                             {question.attachments.map((file, idx) => {
                                 const fileUrl = getFileUrl(file);
@@ -352,14 +352,14 @@ export default function QuestionDetail() {
                                         target={isImage ? undefined : "_blank"}
                                         rel="noopener noreferrer"
                                         onClick={isImage ? handleImageClick : undefined}
-                                        className={`flex items-center gap-2 rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-100 ${isImage ? "cursor-pointer" : ""}`}
+                                        className={`flex items-center gap-1.5 md:gap-2 rounded border border-gray-300 bg-gray-50 px-2 py-1 md:px-3 md:py-2 text-xs md:text-sm text-gray-700 transition hover:bg-gray-100 ${isImage ? "cursor-pointer" : ""}`}
                                     >
                                         {isImage ? (
-                                            <img src={fileUrl || ""} alt={fileName} className="h-8 w-8 rounded object-cover" />
+                                            <img src={fileUrl || ""} alt={fileName} className="h-6 w-6 md:h-8 md:w-8 rounded object-cover flex-shrink-0" />
                                         ) : (
-                                            <FiDownload />
+                                            <FiDownload className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
                                         )}
-                                        <span className="max-w-[150px] truncate">{fileName}</span>
+                                        <span className="max-w-[100px] sm:max-w-[150px] truncate">{fileName}</span>
                                     </a>
                                 );
                             })}
@@ -367,28 +367,29 @@ export default function QuestionDetail() {
                     </div>
                 )}
 
-                <div className="mt-4 flex flex-wrap items-center gap-3">
+                <div className="mt-3 md:mt-4 flex flex-wrap items-center gap-2 md:gap-3">
                     {question.tags?.map((tag) => (
                         <span
                             key={tag}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600"
+                            className="rounded-full bg-gray-100 px-2 py-0.5 md:px-3 md:py-1 text-xs font-medium text-gray-600"
                         >
                             #{tag}
                         </span>
                     ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap items-center gap-4">
+                <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-2 md:gap-4">
                     <button
                         type="button"
                         onClick={handleQuestionLike}
                         disabled={likeLoading || undoLoading}
-                        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${likedByUser
+                        className={`inline-flex items-center gap-1.5 md:gap-2 rounded-full border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${likedByUser
                             ? "border-blue-600 bg-blue-50 text-blue-600"
                             : "border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-600"
                             }`}
                     >
-                        {likedByUser ? "Beğenildi" : "Soruyu Beğen"}
+                        <span className="hidden sm:inline">{likedByUser ? "Beğenildi" : "Soruyu Beğen"}</span>
+                        <span className="sm:hidden">{likedByUser ? "Beğenildi" : "Beğen"}</span>
                         <span>{question.likeCount || question.likes?.length || 0}</span>
                     </button>
                     {user && (
@@ -396,13 +397,13 @@ export default function QuestionDetail() {
                             type="button"
                             onClick={handleToggleSaveQuestion}
                             disabled={isSavingQuestion || isUnsavingQuestion}
-                            className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${isQuestionSaved
+                            className={`inline-flex items-center gap-1.5 md:gap-2 rounded-full border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${isQuestionSaved
                                 ? "border-yellow-500 bg-yellow-50 text-yellow-600 hover:border-yellow-600"
                                 : "border-gray-300 text-gray-600 hover:border-gray-400"
                                 } disabled:opacity-50`}
                         >
-                            <FiBookmark className={`h-4 w-4 ${isQuestionSaved ? "fill-current" : ""}`} />
-                            {isQuestionSaved ? "Kaydedildi" : "Kaydet"}
+                            <FiBookmark className={`h-3.5 w-3.5 md:h-4 md:w-4 ${isQuestionSaved ? "fill-current" : ""}`} />
+                            <span className="hidden sm:inline">{isQuestionSaved ? "Kaydedildi" : "Kaydet"}</span>
                         </button>
                     )}
                     {isQuestionOwner && (
@@ -410,19 +411,20 @@ export default function QuestionDetail() {
                             type="button"
                             onClick={handleToggleSolved}
                             disabled={isMarkingSolved || isMarkingUnsolved}
-                            className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${question.solved
+                            className={`inline-flex items-center gap-1.5 md:gap-2 rounded-full border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${question.solved
                                 ? "border-orange-500 bg-orange-50 text-orange-600 hover:border-orange-600"
                                 : "border-green-500 bg-green-50 text-green-600 hover:border-green-600"
                                 } disabled:opacity-50`}
                         >
-                            <FiCheckCircle className="h-4 w-4" />
-                            {question.solved ? "Çözülmedi Olarak İşaretle" : "Çözüldü Olarak İşaretle"}
+                            <FiCheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                            <span className="hidden md:inline">{question.solved ? "Çözülmedi Olarak İşaretle" : "Çözüldü Olarak İşaretle"}</span>
+                            <span className="md:hidden">{question.solved ? "Çözülmedi" : "Çözüldü"}</span>
                         </button>
                     )}
                     {question.user && (
                         <Link
                             to={`/profile/${question.user._id || question.user.id}`}
-                            className="text-sm text-gray-600 hover:text-blue-600"
+                            className="text-xs md:text-sm text-gray-600 hover:text-blue-600 truncate max-w-[100px] sm:max-w-none"
                         >
                             {question.user.name}
                         </Link>
@@ -431,8 +433,8 @@ export default function QuestionDetail() {
             </div>
 
             {bestAnswer && (
-                <section className="animate-scale-in rounded-lg border border-green-200 bg-green-50 p-5">
-                    <div className="mb-2 text-sm font-semibold text-green-700">
+                <section className="animate-scale-in rounded-lg border border-green-200 bg-green-50 p-3 md:p-5">
+                    <div className="mb-2 text-xs md:text-sm font-semibold text-green-700">
                         En iyi cevap
                     </div>
                     <AnswerCard answer={bestAnswer} questionId={id} />
@@ -442,7 +444,7 @@ export default function QuestionDetail() {
                             <button
                                 type="button"
                                 onClick={() => handleDeleteAnswer(bestAnswer._id)}
-                                className="mt-2 text-sm text-red-500 hover:underline"
+                                className="mt-2 text-xs md:text-sm text-red-500 hover:underline"
                             >
                                 Cevabı Sil
                             </button>
@@ -450,10 +452,10 @@ export default function QuestionDetail() {
                 </section>
             )}
 
-            <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Tüm Cevaplar</h2>
+            <section className="space-y-3 md:space-y-4">
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900">Tüm Cevaplar</h2>
                 {regularAnswers.length === 0 && !bestAnswer && (
-                    <div className="rounded bg-white p-4 text-center text-gray-500 shadow">
+                    <div className="rounded bg-white p-3 md:p-4 text-center text-sm md:text-base text-gray-500 shadow">
                         Henüz cevap yok. İlk cevabı sen yaz!
                     </div>
                 )}
@@ -468,7 +470,7 @@ export default function QuestionDetail() {
                             <button
                                 type="button"
                                 onClick={() => handleDeleteAnswer(answer._id)}
-                                className="self-end text-sm text-red-500 hover:underline"
+                                className="self-end text-xs md:text-sm text-red-500 hover:underline"
                             >
                                 Cevabı Sil
                             </button>
@@ -477,12 +479,12 @@ export default function QuestionDetail() {
                 ))}
             </section>
 
-            <section className="animate-fade-in rounded-lg bg-white p-6 shadow">
-                <h3 className="text-xl font-semibold text-gray-900">Cevap Yaz</h3>
+            <section className="animate-fade-in rounded-lg bg-white p-4 md:p-6 shadow">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900">Cevap Yaz</h3>
                 {user ? (
-                    <form onSubmit={handleSubmit(onSubmitAnswer)} className="mt-4 space-y-4">
+                    <form onSubmit={handleSubmit(onSubmitAnswer)} className="mt-3 md:mt-4 space-y-3 md:space-y-4">
                         <div>
-                            <label className="mb-1 block text-sm font-medium text-gray-700">
+                            <label className="mb-1 block text-xs md:text-sm font-medium text-gray-700">
                                 Cevabını yaz (Markdown desteklenir)
                             </label>
                             <MarkdownEditor
@@ -491,10 +493,10 @@ export default function QuestionDetail() {
                                     setValue("content", value);
                                 }}
                                 placeholder="Cevabını detaylıca yaz... Markdown formatında yazabilirsin: **kalın**, *italik*, `kod`, ```kod bloğu```"
-                                minHeight="250px"
+                                minHeight="200px"
                             />
                             {errors.content && (
-                                <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>
+                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.content.message}</p>
                             )}
                         </div>
                         <div>
@@ -508,25 +510,26 @@ export default function QuestionDetail() {
                             />
                             <label
                                 htmlFor="answer-file-input"
-                                className="flex cursor-pointer items-center gap-2 rounded border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                                className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 md:px-4 md:py-2 text-xs md:text-sm font-medium text-gray-700 transition hover:bg-gray-100"
                             >
-                                <FiPaperclip />
-                                Dosya Ekle (En fazla 5, 5MB'a kadar)
+                                <FiPaperclip className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                <span className="hidden sm:inline">Dosya Ekle (En fazla 5, 5MB'a kadar)</span>
+                                <span className="sm:hidden">Dosya Ekle</span>
                             </label>
                             {selectedFiles.length > 0 && (
                                 <div className="mt-2 space-y-2">
                                     {selectedFiles.map((file, index) => (
                                         <div
                                             key={index}
-                                            className="flex items-center justify-between rounded border border-gray-200 bg-gray-50 px-3 py-2"
+                                            className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 md:px-3 md:py-2"
                                         >
-                                            <span className="text-sm text-gray-700">{file.name}</span>
+                                            <span className="text-xs md:text-sm text-gray-700 truncate flex-1 mr-2">{file.name}</span>
                                             <button
                                                 type="button"
                                                 onClick={() => removeFile(index)}
-                                                className="text-red-500 hover:text-red-700"
+                                                className="text-red-500 hover:text-red-700 flex-shrink-0"
                                             >
-                                                <FiX />
+                                                <FiX className="h-4 w-4" />
                                             </button>
                                         </div>
                                     ))}
@@ -536,13 +539,13 @@ export default function QuestionDetail() {
                         <button
                             type="submit"
                             disabled={answerLoading}
-                            className="rounded bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
+                            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 md:py-2 text-sm md:text-base font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50 active:scale-95"
                         >
                             {answerLoading ? "Gönderiliyor..." : "Cevabı Gönder"}
                         </button>
                     </form>
                 ) : (
-                    <p className="mt-2 text-sm text-gray-600">
+                    <p className="mt-2 text-xs md:text-sm text-gray-600">
                         Cevap yazmak için{" "}
                         <Link to="/login" className="text-blue-600 underline">
                             giriş yap

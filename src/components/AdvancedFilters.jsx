@@ -22,16 +22,15 @@ export default function AdvancedFilters({ filters, onFiltersChange, onClear }) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
-          hasActiveFilters
+        className={`flex items-center gap-1.5 md:gap-2 rounded-full border px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-semibold transition active:scale-95 ${hasActiveFilters
             ? "border-blue-600 bg-blue-50 text-blue-600"
             : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
+          }`}
       >
-        <FiFilter className="h-4 w-4" />
-        {t("home.filter")}
+        <FiFilter className="h-3.5 w-3.5 md:h-4 md:w-4" />
+        <span className="hidden sm:inline">{t("home.filter")}</span>
         {hasActiveFilters && (
-          <span className="ml-1 rounded-full bg-blue-600 px-2 py-0.5 text-xs text-white">
+          <span className="ml-1 rounded-full bg-blue-600 px-1.5 py-0.5 md:px-2 text-xs text-white">
             {Object.values(filters).filter(
               (v) => v !== "" && v !== null && v !== undefined
             ).length}
@@ -45,7 +44,7 @@ export default function AdvancedFilters({ filters, onFiltersChange, onClear }) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-12 z-20 w-80 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl animate-slide-in-right">
+          <div className="absolute right-0 top-12 z-20 w-[calc(100vw-2rem)] sm:w-80 max-w-sm rounded-xl md:rounded-2xl border border-gray-200 bg-white p-3 md:p-4 shadow-xl animate-slide-in-right">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900">{t("home.filter")}</h3>
               <button

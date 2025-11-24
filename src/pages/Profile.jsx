@@ -269,24 +269,24 @@ export default function Profile() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-4 md:space-y-6 px-4 md:px-6 animate-fade-in">
       {/* Modern Profile Header with Cover */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 shadow-2xl">
+      <div className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 shadow-2xl">
         {/* Cover Image Area */}
-        <div className="h-48 bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 backdrop-blur-sm"></div>
+        <div className="h-32 md:h-48 bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 backdrop-blur-sm"></div>
 
         {/* Profile Content */}
-        <div className="relative -mt-20 px-8 pb-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="relative -mt-16 md:-mt-20 px-4 md:px-8 pb-4 md:pb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
             {/* Profile Image & Info */}
-            <div className="flex flex-col md:flex-row items-start md:items-end gap-6">
+            <div className="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative">
                   <img
                     src={profileImageUrl}
                     alt={profile.name}
-                    className="h-32 w-32 rounded-full border-4 border-white object-cover shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                    className="h-24 w-24 md:h-32 md:w-32 rounded-full border-4 border-white object-cover shadow-2xl transition-transform duration-300 group-hover:scale-105"
                   />
                   {isOwner && (
                     <>
@@ -300,7 +300,7 @@ export default function Profile() {
                       />
                       <label
                         htmlFor="profile-image-input"
-                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 cursor-pointer rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-blue-700 shadow-lg transition hover:bg-blue-50 hover:scale-105"
+                        className="absolute -bottom-1 md:-bottom-2 left-1/2 -translate-x-1/2 cursor-pointer rounded-full bg-white px-2 py-1 md:px-3 md:py-1.5 text-xs font-semibold text-blue-700 shadow-lg transition hover:bg-blue-50 hover:scale-105"
                       >
                         {isUploading ? (
                           <span className="flex items-center gap-1">
@@ -323,15 +323,15 @@ export default function Profile() {
               </div>
 
               <div className="text-white">
-                <p className="text-sm uppercase tracking-widest text-white/70 mb-1">
+                <p className="text-xs md:text-sm uppercase tracking-widest text-white/70 mb-1">
                   {t("profile.profil")}
                 </p>
-                <h1 className="text-4xl font-black tracking-tight mb-2">
+                <h1 className="text-2xl md:text-4xl font-black tracking-tight mb-1 md:mb-2">
                   {profile.name}
                 </h1>
-                <p className="text-white/90 mb-4">{profile.email}</p>
+                <p className="text-sm md:text-base text-white/90 mb-3 md:mb-4 break-words">{profile.email}</p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold">
+                  <span className="inline-flex items-center gap-1 md:gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-semibold">
                     {profile.role === "teacher" ? (
                       <>
                         <FiUser className="h-3.5 w-3.5" />
@@ -345,15 +345,15 @@ export default function Profile() {
                     )}
                   </span>
                   {profile.role === "student" && profile.department && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold">
-                      <FiTrendingUp className="h-3.5 w-3.5" />
-                      {profile.department}
+                    <span className="inline-flex items-center gap-1 md:gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-semibold">
+                      <FiTrendingUp className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                      <span className="truncate max-w-[150px] md:max-w-none">{profile.department}</span>
                     </span>
                   )}
                   {profile.role === "teacher" && profile.branch && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold">
-                      <FiTrendingUp className="h-3.5 w-3.5" />
-                      {profile.branch}
+                    <span className="inline-flex items-center gap-1 md:gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-semibold">
+                      <FiTrendingUp className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                      <span className="truncate max-w-[150px] md:max-w-none">{profile.branch}</span>
                     </span>
                   )}
                 </div>
@@ -364,7 +364,7 @@ export default function Profile() {
             {isOwner && (
               <button
                 onClick={handleToggleEdit}
-                className="flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-6 py-3 font-semibold text-white transition hover:bg-white/30 hover:scale-105 shadow-lg"
+                className="flex items-center justify-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold text-white transition hover:bg-white/30 hover:scale-105 shadow-lg w-full md:w-auto"
               >
                 {editMode ? (
                   <>
@@ -385,42 +385,42 @@ export default function Profile() {
 
       {/* Profile Info Card - Sabit, kartların üstünde */}
       {!editMode && (
-        <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-4">
+        <div className="rounded-xl md:rounded-2xl border border-gray-200 bg-white p-4 md:p-8 shadow-sm">
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2">
+            <div className="space-y-3 md:space-y-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 md:mb-2">
                   {t("profile.name")}
                 </p>
-                <p className="text-lg font-semibold text-gray-900">{profile.name}</p>
+                <p className="text-base md:text-lg font-semibold text-gray-900 break-words">{profile.name}</p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 md:mb-2">
                   {t("profile.email")}
                 </p>
-                <p className="text-lg font-semibold text-gray-900">{profile.email}</p>
+                <p className="text-base md:text-lg font-semibold text-gray-900 break-words">{profile.email}</p>
               </div>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 md:mb-2">
                   Üyelik Tarihi
                 </p>
-                <p className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-                  <FiCalendar className="h-4 w-4 text-gray-400" />
-                  {stats.memberSince ? stats.memberSince.toLocaleDateString("tr-TR", {
+                <p className="text-base md:text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <FiCalendar className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                  <span className="break-words">{stats.memberSince ? stats.memberSince.toLocaleDateString("tr-TR", {
                     year: "numeric",
                     month: "long",
                     day: "numeric"
-                  }) : "-"}
+                  }) : "-"}</span>
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 md:mb-2">
                   {t("profile.reputation")}
                 </p>
-                <p className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-                  <FiAward className="h-4 w-4 text-amber-500" />
+                <p className="text-base md:text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <FiAward className="h-4 w-4 text-amber-500 flex-shrink-0" />
                   {stats.reputation} puan
                 </p>
               </div>
@@ -431,23 +431,23 @@ export default function Profile() {
 
       {/* İstatistik Kartları - Tıklanabilir */}
       {isOwner && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           <button
             onClick={() => {
               setActiveTab("questions");
               setEditMode(false);
             }}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full ${activeTab === "questions" ? "ring-4 ring-blue-500 ring-offset-2" : ""}`}
+            className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full active:scale-95 ${activeTab === "questions" ? "ring-2 md:ring-4 ring-blue-500 ring-offset-1 md:ring-offset-2" : ""}`}
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-blue-600/70 mb-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-blue-600/70 mb-1 truncate">
                   {t("profile.questions")}
                 </p>
-                <p className="text-3xl font-black text-blue-700">{stats.questions}</p>
+                <p className="text-2xl md:text-3xl font-black text-blue-700">{stats.questions}</p>
               </div>
-              <div className="rounded-full bg-blue-200/50 p-3">
-                <FiMessageSquare className="h-6 w-6 text-blue-600" />
+              <div className="rounded-full bg-blue-200/50 p-2 md:p-3 flex-shrink-0">
+                <FiMessageSquare className="h-4 w-4 md:h-6 md:w-6 text-blue-600" />
               </div>
             </div>
           </button>
@@ -457,17 +457,17 @@ export default function Profile() {
               setActiveTab("savedQuestions");
               setEditMode(false);
             }}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 to-green-100 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full ${activeTab === "savedQuestions" ? "ring-4 ring-green-500 ring-offset-2" : ""}`}
+            className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-green-50 to-green-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full active:scale-95 ${activeTab === "savedQuestions" ? "ring-2 md:ring-4 ring-green-500 ring-offset-1 md:ring-offset-2" : ""}`}
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-green-600/70 mb-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-green-600/70 mb-1 truncate">
                   {t("profile.savedQuestions")}
                 </p>
-                <p className="text-3xl font-black text-green-700">{stats.savedQuestions}</p>
+                <p className="text-2xl md:text-3xl font-black text-green-700">{stats.savedQuestions}</p>
               </div>
-              <div className="rounded-full bg-green-200/50 p-3">
-                <FiBookmark className="h-6 w-6 text-green-600" />
+              <div className="rounded-full bg-green-200/50 p-2 md:p-3 flex-shrink-0">
+                <FiBookmark className="h-4 w-4 md:h-6 md:w-6 text-green-600" />
               </div>
             </div>
           </button>
@@ -477,17 +477,17 @@ export default function Profile() {
               setActiveTab("savedAnswers");
               setEditMode(false);
             }}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full ${activeTab === "savedAnswers" ? "ring-4 ring-purple-500 ring-offset-2" : ""}`}
+            className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full active:scale-95 ${activeTab === "savedAnswers" ? "ring-2 md:ring-4 ring-purple-500 ring-offset-1 md:ring-offset-2" : ""}`}
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-purple-600/70 mb-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-purple-600/70 mb-1 truncate">
                   {t("profile.savedAnswers")}
                 </p>
-                <p className="text-3xl font-black text-purple-700">{stats.savedAnswers}</p>
+                <p className="text-2xl md:text-3xl font-black text-purple-700">{stats.savedAnswers}</p>
               </div>
-              <div className="rounded-full bg-purple-200/50 p-3">
-                <FiBookmark className="h-6 w-6 text-purple-600" />
+              <div className="rounded-full bg-purple-200/50 p-2 md:p-3 flex-shrink-0">
+                <FiBookmark className="h-4 w-4 md:h-6 md:w-6 text-purple-600" />
               </div>
             </div>
           </button>
@@ -497,17 +497,17 @@ export default function Profile() {
               setActiveTab(null);
               setEditMode(false);
             }}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full ${activeTab === null ? "ring-4 ring-amber-500 ring-offset-2" : ""}`}
+            className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-left w-full active:scale-95 ${activeTab === null ? "ring-2 md:ring-4 ring-amber-500 ring-offset-1 md:ring-offset-2" : ""}`}
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-amber-600/70 mb-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-amber-600/70 mb-1 truncate">
                   {t("profile.reputation")}
                 </p>
-                <p className="text-3xl font-black text-amber-700">{stats.reputation}</p>
+                <p className="text-2xl md:text-3xl font-black text-amber-700">{stats.reputation}</p>
               </div>
-              <div className="rounded-full bg-amber-200/50 p-3">
-                <FiAward className="h-6 w-6 text-amber-600" />
+              <div className="rounded-full bg-amber-200/50 p-2 md:p-3 flex-shrink-0">
+                <FiAward className="h-4 w-4 md:h-6 md:w-6 text-amber-600" />
               </div>
             </div>
           </button>
@@ -641,18 +641,18 @@ export default function Profile() {
       {editMode && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg animate-fade-in"
+          className="space-y-4 md:space-y-6 rounded-xl md:rounded-2xl border border-gray-200 bg-white p-4 md:p-8 shadow-lg animate-fade-in"
         >
-          <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
-            <div className="rounded-full bg-blue-100 p-2">
-              <FiSettings className="h-5 w-5 text-blue-600" />
+          <div className="flex items-center gap-3 pb-3 md:pb-4 border-b border-gray-200">
+            <div className="rounded-full bg-blue-100 p-1.5 md:p-2">
+              <FiSettings className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900">{t("profile.edit")}</h3>
-              <p className="text-sm text-gray-500">Profil bilgilerini güncelle</p>
+              <h3 className="text-lg md:text-xl font-bold text-gray-900">{t("profile.edit")}</h3>
+              <p className="text-xs md:text-sm text-gray-500">Profil bilgilerini güncelle</p>
             </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-semibold text-gray-700">
                 {t("profile.name")}
@@ -710,18 +710,18 @@ export default function Profile() {
             </div>
           )}
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t border-gray-200">
             <button
               type="button"
               onClick={handleToggleEdit}
-              className="rounded-xl border-2 border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-50"
+              className="rounded-xl border-2 border-gray-300 bg-white px-4 py-2.5 md:px-6 md:py-3 text-sm md:text-base font-semibold text-gray-700 transition hover:bg-gray-50"
             >
               {t("common.cancel")}
             </button>
             <button
               type="submit"
               disabled={isSaving || !isDirty}
-              className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-semibold text-white shadow-md transition hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 md:px-6 md:py-3 text-sm md:text-base font-semibold text-white shadow-md transition hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isSaving ? (
                 <>

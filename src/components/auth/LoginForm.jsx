@@ -95,31 +95,31 @@ export default function LoginForm({
     return (
         <div>
             {showTitle && (
-                <h2 className="mb-4 text-2xl font-semibold text-gray-900">Giriş Yap</h2>
+                <h2 className="mb-3 md:mb-4 text-xl md:text-2xl font-semibold text-gray-900">Giriş Yap</h2>
             )}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
                 <div>
-                    <label className="mb-1 block text-sm font-medium">Email</label>
+                    <label className="mb-1 block text-xs md:text-sm font-medium">Email</label>
                     <input
                         type="email"
-                        className="w-full rounded border px-3 py-2"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm md:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none"
                         placeholder="ornek@mail.com"
                         {...register("email")}
                     />
                     {errors.email && (
-                        <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                        <p className="mt-1 text-xs md:text-sm text-red-500">{errors.email.message}</p>
                     )}
                 </div>
                 <div>
-                    <label className="mb-1 block text-sm font-medium">Şifre</label>
+                    <label className="mb-1 block text-xs md:text-sm font-medium">Şifre</label>
                     <input
                         type="password"
-                        className="w-full rounded border px-3 py-2"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm md:text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none"
                         placeholder="******"
                         {...register("password")}
                     />
                     {errors.password && (
-                        <p className="mt-1 text-sm text-red-500">
+                        <p className="mt-1 text-xs md:text-sm text-red-500">
                             {errors.password.message}
                         </p>
                     )}
@@ -127,7 +127,7 @@ export default function LoginForm({
 
                 <button
                     type="submit"
-                    className="w-full rounded bg-blue-600 py-2 text-white font-semibold transition hover:bg-blue-700 disabled:opacity-50"
+                    className="w-full rounded-lg bg-blue-600 py-2.5 md:py-2 text-sm md:text-base text-white font-semibold transition hover:bg-blue-700 disabled:opacity-50 active:scale-95"
                     disabled={isLoading}
                 >
                     {isLoading ? "Giriş yapılıyor..." : "Giriş Yap"}

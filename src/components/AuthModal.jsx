@@ -31,31 +31,31 @@ export default function AuthModal() {
     }
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 px-4 backdrop-blur-sm animate-fade-in">
-            <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl animate-scale-in">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 px-3 md:px-4 backdrop-blur-sm animate-fade-in">
+            <div className="w-full max-w-lg rounded-2xl md:rounded-3xl bg-white p-4 md:p-6 shadow-2xl animate-scale-in max-h-[90vh] overflow-y-auto">
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm uppercase tracking-wide text-blue-500">
+                        <p className="text-xs md:text-sm uppercase tracking-wide text-blue-500">
                             EduQA Campus
                         </p>
-                        <h3 className="text-2xl font-bold text-gray-900">
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                             Hesabınla devam et
                         </h3>
                     </div>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="rounded-full border border-gray-200 p-2 text-gray-500 transition hover:text-gray-800"
+                        className="rounded-full border border-gray-200 p-1.5 md:p-2 text-gray-500 transition hover:text-gray-800 flex-shrink-0"
                     >
-                        <FiX className="h-5 w-5" />
+                        <FiX className="h-4 w-4 md:h-5 md:w-5" />
                     </button>
                 </div>
 
-                <div className="mt-6 flex rounded-full bg-gray-100 p-1 text-sm font-semibold">
+                <div className="mt-4 md:mt-6 flex rounded-full bg-gray-100 p-1 text-xs md:text-sm font-semibold">
                     <button
                         type="button"
                         onClick={() => dispatch(setAuthModalMode("login"))}
-                        className={`flex-1 rounded-full px-4 py-2 transition ${mode === "login"
+                        className={`flex-1 rounded-full px-3 py-1.5 md:px-4 md:py-2 transition ${mode === "login"
                             ? "bg-white text-blue-600 shadow"
                             : "text-gray-500"
                             }`}
@@ -65,7 +65,7 @@ export default function AuthModal() {
                     <button
                         type="button"
                         onClick={() => dispatch(setAuthModalMode("register"))}
-                        className={`flex-1 rounded-full px-4 py-2 transition ${mode === "register"
+                        className={`flex-1 rounded-full px-3 py-1.5 md:px-4 md:py-2 transition ${mode === "register"
                             ? "bg-white text-blue-600 shadow"
                             : "text-gray-500"
                             }`}
@@ -74,7 +74,7 @@ export default function AuthModal() {
                     </button>
                 </div>
 
-                <div className="mt-6">
+                <div className="mt-4 md:mt-6">
                     {mode === "login" ? (
                         <LoginForm showTitle={false} onSuccess={handleAuthSuccess} />
                     ) : (

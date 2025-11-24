@@ -174,29 +174,29 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 md:space-y-8 px-4 md:px-0">
       <HeroSection user={user} stats={heroStats} onAsk={handleAskQuestion} />
 
       <StatHighlights stats={highlightStats} />
 
-      <div className="grid gap-6 lg:grid-cols-[3fr,1.3fr]">
-        <div className="space-y-6">
-          <section className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="grid gap-4 md:gap-6 lg:grid-cols-[3fr,1.3fr]">
+        <div className="space-y-4 md:space-y-6">
+          <section className="rounded-2xl md:rounded-3xl border border-slate-100 bg-white p-4 md:p-6 shadow-sm">
+            <div className="flex flex-col gap-3 md:gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-blue-500">
+                <p className="text-xs md:text-sm font-semibold uppercase tracking-wide text-blue-500">
                   {t("home.campusFeed")}
                 </p>
-                <h2 className="text-2xl font-bold text-slate-900">
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900">
                   {t("home.title")}
                 </h2>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {activeTag && (
                   <button
                     type="button"
                     onClick={clearActiveTag}
-                    className="text-sm font-semibold text-blue-600 underline"
+                    className="text-xs md:text-sm font-semibold text-blue-600 underline"
                   >
                     #{activeTag} {t("home.removeFilter")}
                   </button>
@@ -208,7 +208,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="mt-4 md:mt-6 grid gap-3 md:gap-4 md:grid-cols-3">
               <input
                 type="text"
                 value={search}
@@ -217,12 +217,12 @@ export default function Home() {
                   setActiveTag("");
                 }}
                 placeholder={t("home.searchPlaceholder")}
-                className="rounded-2xl border border-slate-200 px-4 py-3 text-sm md:col-span-2"
+                className="rounded-xl md:rounded-2xl border border-slate-200 px-3 py-2 md:px-4 md:py-3 text-sm md:col-span-2"
               />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="rounded-2xl border border-slate-200 px-4 py-3 text-sm"
+                className="rounded-xl md:rounded-2xl border border-slate-200 px-3 py-2 md:px-4 md:py-3 text-sm"
               >
                 <option value="newest">{t("home.sortNewest")}</option>
                 <option value="most_liked">{t("home.sortMostLiked")}</option>
@@ -249,7 +249,7 @@ export default function Home() {
 
           {!isLoading && !isError && questions.length > 0 && (
             <>
-              <div className="grid gap-4">
+              <div className="grid gap-3 md:gap-4">
                 {questions.map((question, index) => (
                   <div
                     key={question._id}

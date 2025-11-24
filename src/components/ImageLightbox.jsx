@@ -22,7 +22,7 @@ export default function ImageLightbox({ images, currentIndex, onClose }) {
         };
 
         document.addEventListener("keydown", handleKeyDown);
-        document.body.style.overflow = "hidden"; 
+        document.body.style.overflow = "hidden";
 
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
@@ -64,10 +64,10 @@ export default function ImageLightbox({ images, currentIndex, onClose }) {
             {/* Close Button */}
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
+                className="absolute top-2 right-2 md:top-4 md:right-4 z-10 rounded-full bg-white/10 p-2 md:p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
                 aria-label="Close"
             >
-                <FiX className="h-6 w-6" />
+                <FiX className="h-5 w-5 md:h-6 md:w-6" />
             </button>
 
             {/* Navigation Buttons */}
@@ -78,20 +78,20 @@ export default function ImageLightbox({ images, currentIndex, onClose }) {
                             e.stopPropagation();
                             handlePrev();
                         }}
-                        className="absolute left-4 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
+                        className="absolute left-2 md:left-4 z-10 rounded-full bg-white/10 p-2 md:p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
                         aria-label="Previous"
                     >
-                        <FiChevronLeft className="h-6 w-6" />
+                        <FiChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
                     </button>
                     <button
                         onClick={(e) => {
                             e.stopPropagation();
                             handleNext();
                         }}
-                        className="absolute right-4 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
+                        className="absolute right-2 md:right-4 z-10 rounded-full bg-white/10 p-2 md:p-3 text-white transition hover:bg-white/20 backdrop-blur-sm"
                         aria-label="Next"
                     >
-                        <FiChevronRight className="h-6 w-6" />
+                        <FiChevronRight className="h-5 w-5 md:h-6 md:w-6" />
                     </button>
                 </>
             )}
