@@ -14,15 +14,15 @@
         "clear": "Temizle",
         "retry": "Tekrar Dene",
         "home": "Ana Sayfa",
-    "today": "Bugün",
-    "thisWeek": "Bu Hafta",
-    "thisMonth": "Bu Ay",
-    "thisYear": "Bu Yıl",
-    "minimum": "Minimum",
-    "previous": "Önceki",
-    "next": "Sonraki",
-    "page": "Sayfa"
-  },
+        "today": "Bugün",
+        "thisWeek": "Bu Hafta",
+        "thisMonth": "Bu Ay",
+        "thisYear": "Bu Yıl",
+        "minimum": "Minimum",
+        "previous": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa"
+    },
     "nav": {
         "discover": "Keşfet",
         "askQuestion": "Soru Sor",
@@ -108,6 +108,11 @@
         "bestAnswer": "En İyi Cevap",
         "noAnswers": "Henüz cevap yok",
         "askDescription": "Başlığını net yaz, detayları açıklayıcı anlat ve gerekiyorsa etiket ekle."
+    },
+    "answer": {
+        "deleteTitle": "Cevabı Sil",
+        "deleteMessage": "Bu cevabı silmek istediğine emin misin? Bu işlem geri alınamaz.",
+        "deleteConfirm": "Evet, Sil"
     },
     "profile": {
         "title": "Profil",

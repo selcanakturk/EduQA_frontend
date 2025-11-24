@@ -12,6 +12,8 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 import ErrorFallback from "../components/ErrorFallback";
 import SkeletonLoader from "../components/SkeletonLoader";
 import ImageLightbox from "../components/ImageLightbox";
+import ConfirmationModal from "../components/ConfirmationModal";
+import { useTranslation } from "react-i18next";
 import {
     useGetQuestionByIdQuery,
     useLikeQuestionMutation,
@@ -47,10 +49,13 @@ export default function QuestionDetail() {
         refetch,
     } = useGetQuestionByIdQuery(id, { skip: !id });
     const question = data?.data;
+    const { t } = useTranslation();
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [lightboxImages, setLightboxImages] = useState([]);
     const [lightboxIndex, setLightboxIndex] = useState(0);
     const [showLightbox, setShowLightbox] = useState(false);
+    const [showDeleteAnswerConfirm, setShowDeleteAnswerConfirm] = useState(false);
+    const [answerToDelete, setAnswerToDelete] = useState(null);
 
     const [likeQuestion, { isLoading: likeLoading }] = useLikeQuestionMutation();
     const [undoLikeQuestion, { isLoading: undoLoading }] =
@@ -205,11 +210,20 @@ export default function QuestionDetail() {
     };
 
     const handleDeleteAnswer = async (answerId) => {
-        try {
-            await deleteAnswer({ questionId: id, answerId }).unwrap();
-            toast.success("Cevap silindi");
-        } catch (err) {
-            toast.error(err?.data?.message || "Cevap silinemedi");
+        setAnswerToDelete(answerId);
+        setShowDeleteAnswerConfirm(true);
+    };
+
+    const confirmDeleteAnswer = async () => {
+        if (answerToDelete) {
+            try {
+                await deleteAnswer({ questionId: id, answerId: answerToDelete }).unwrap();
+                toast.success("Cevap silindi");
+                setShowDeleteAnswerConfirm(false);
+                setAnswerToDelete(null);
+            } catch (err) {
+                toast.error(err?.data?.message || "Cevap silinemedi");
+            }
         }
     };
 
@@ -546,6 +560,21 @@ export default function QuestionDetail() {
                     onClose={() => setShowLightbox(false)}
                 />
             )}
+
+            {/* Delete Answer Confirmation Modal */}
+            <ConfirmationModal
+                isOpen={showDeleteAnswerConfirm}
+                onClose={() => {
+                    setShowDeleteAnswerConfirm(false);
+                    setAnswerToDelete(null);
+                }}
+                onConfirm={confirmDeleteAnswer}
+                title={t("answer.deleteTitle")}
+                message={t("answer.deleteMessage")}
+                confirmText={t("answer.deleteConfirm")}
+                cancelText={t("common.cancel")}
+                type="danger"
+            />
         </div>
     );
 }
