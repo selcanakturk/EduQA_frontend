@@ -9,6 +9,7 @@ import { FiX, FiPaperclip, FiDownload, FiCheckCircle, FiBookmark } from "react-i
 import { selectCurrentUser, setCredentials } from "../features/auth/authSlice";
 import MarkdownEditor from "../components/MarkdownEditor";
 import MarkdownRenderer from "../components/MarkdownRenderer";
+import ErrorFallback from "../components/ErrorFallback";
 import {
     useGetQuestionByIdQuery,
     useLikeQuestionMutation,
@@ -242,15 +243,10 @@ export default function QuestionDetail() {
 
     if (isError) {
         return (
-            <div className="rounded bg-red-50 p-4 text-red-600">
-                Soru getirilemedi: {error?.data?.message || error?.error}
-                <button
-                    className="ml-4 text-sm font-semibold text-blue-600 underline"
-                    onClick={refetch}
-                >
-                    Tekrar dene
-                </button>
-            </div>
+            <ErrorFallback
+                error={error}
+                resetErrorBoundary={refetch}
+            />
         );
     }
 
@@ -353,8 +349,8 @@ export default function QuestionDetail() {
                             onClick={handleToggleSaveQuestion}
                             disabled={isSavingQuestion || isUnsavingQuestion}
                             className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${isQuestionSaved
-                                    ? "border-yellow-500 bg-yellow-50 text-yellow-600 hover:border-yellow-600"
-                                    : "border-gray-300 text-gray-600 hover:border-gray-400"
+                                ? "border-yellow-500 bg-yellow-50 text-yellow-600 hover:border-yellow-600"
+                                : "border-gray-300 text-gray-600 hover:border-gray-400"
                                 } disabled:opacity-50`}
                         >
                             <FiBookmark className={`h-4 w-4 ${isQuestionSaved ? "fill-current" : ""}`} />

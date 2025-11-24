@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FiAward, FiStar } from "react-icons/fi";
 
 export default function TopContributors({ contributors = [] }) {
+    const { t } = useTranslation();
     if (!contributors.length) return null;
 
     return (
@@ -9,11 +11,11 @@ export default function TopContributors({ contributors = [] }) {
             <div className="flex items-center gap-2 text-amber-700">
                 <FiAward />
                 <p className="text-sm font-semibold uppercase tracking-wide">
-                    Haftanın İsimleri
+                    {t("home.namesOfTheWeek")}
                 </p>
             </div>
             <h2 className="mt-2 text-xl font-bold text-slate-900">
-                En çok katkı sağlayan topluluk üyeleri
+                {t("home.topContributors")}
             </h2>
             <div className="mt-4 space-y-3">
                 {contributors.map((contributor, idx) => (
@@ -30,13 +32,13 @@ export default function TopContributors({ contributors = [] }) {
                                 {contributor.name}
                             </Link>
                             <p className="text-xs text-slate-500">
-                                {contributor.department ?? "Genel"} •{" "}
-                                {contributor.questions} soru • {contributor.answers} cevap
+                                {contributor.department ?? t("home.general")} •{" "}
+                                {contributor.questions} {t("home.question")} • {contributor.answers} {t("home.answer")}
                             </p>
                         </div>
                         <div className="flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">
                             <FiStar />
-                            {contributor.reputation} rep
+                            {contributor.reputation} {t("home.rep")}
                         </div>
                     </div>
                 ))}

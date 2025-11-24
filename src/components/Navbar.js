@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { FiUser, FiBell } from "react-icons/fi";
 import { useLogoutMutation } from "../features/auth/authApi";
 import {
@@ -15,7 +16,9 @@ import {
   useMarkAsReadMutation,
   useMarkAllAsReadMutation,
 } from "../features/notifications/notificationApi";
+import LanguageSwitcher from "./LanguageSwitcher";
 export default function Navbar() {
+  const { t } = useTranslation();
   const user = useSelector(selectCurrentUser);
   const [logoutApi, { isLoading }] = useLogoutMutation();
   const [showNotifications, setShowNotifications] = useState(false);
@@ -56,10 +59,10 @@ export default function Navbar() {
       }
       dispatch(clearCredentials());
       dispatch(apiSlice.util.resetApiState());
-      toast.success("Çıkış yapıldı");
+      toast.success(t("auth.logoutSuccess"));
       navigate("/");
     } catch (error) {
-      toast.error(error?.data?.message || "Çıkış işlemi başarısız");
+      toast.error(error?.data?.message || t("auth.logoutFailed"));
     }
   };
 
@@ -69,17 +72,18 @@ export default function Navbar() {
         EduQA<span className="text-slate-900"> Campus</span>
       </Link>
       <div className="flex flex-wrap items-center gap-4 text-sm sm:text-base">
+        <LanguageSwitcher />
         <Link
           to="/"
           className="font-semibold text-gray-600 transition hover:text-blue-600"
         >
-          Keşfet
+          {t("nav.discover")}
         </Link>
         <Link
           to="/ask"
           className="rounded-full border border-blue-200 px-4 py-2 font-semibold text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
         >
-          Soru Sor
+          {t("nav.askQuestion")}
         </Link>
         {user ? (
           <div className="flex items-center gap-3">
@@ -99,7 +103,7 @@ export default function Navbar() {
               {showNotifications && (
                 <div className="absolute right-0 top-12 z-[9999] w-80 max-h-96 overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-xl">
                   <div className="sticky top-0 flex items-center justify-between border-b border-gray-200 bg-white p-4">
-                    <h3 className="font-semibold text-gray-900">Bildirimler</h3>
+                    <h3 className="font-semibold text-gray-900">{t("notifications.title")}</h3>
                     {unreadCount > 0 && (
                       <button
                         onClick={async () => {
@@ -107,19 +111,19 @@ export default function Navbar() {
                             await markAllAsRead().unwrap();
                             refetch();
                           } catch (err) {
-                            toast.error("Bildirimler okunmadı olarak işaretlenemedi");
+                            toast.error(t("notifications.markAllReadError"));
                           }
                         }}
                         className="text-xs text-blue-600 hover:text-blue-700"
                       >
-                        Tümünü okundu işaretle
+                        {t("notifications.markAllRead")}
                       </button>
                     )}
                   </div>
                   <div className="max-h-80 overflow-y-auto">
                     {notifications.length === 0 ? (
                       <div className="p-6 text-center text-sm text-gray-500">
-                        Bildirim yok
+                        {t("notifications.noNotifications")}
                       </div>
                     ) : (
                       notifications.map((notification) => (
@@ -191,7 +195,7 @@ export default function Navbar() {
               disabled={isLoading}
               className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60"
             >
-              Çıkış
+              {t("nav.logout")}
             </button>
           </div>
         ) : (
@@ -201,7 +205,7 @@ export default function Navbar() {
             className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700"
           >
             <FiUser className="text-white" />
-            Hesabım
+            {t("nav.myAccount")}
           </button>
         )}
       </div>

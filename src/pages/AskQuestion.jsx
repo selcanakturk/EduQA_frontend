@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { FiX, FiPaperclip } from "react-icons/fi";
@@ -25,6 +26,7 @@ const questionSchema = z.object({
 });
 
 export default function AskQuestion() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [askQuestion, { isLoading }] = useAskQuestionMutation();
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -116,10 +118,9 @@ export default function AskQuestion() {
 
   return (
     <div className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow">
-      <h1 className="text-3xl font-bold text-gray-900">Soru Sor</h1>
+      <h1 className="text-3xl font-bold text-gray-900">{t("question.ask")}</h1>
       <p className="mt-2 text-gray-600">
-        Başlığını net yaz, detayları açıklayıcı anlat ve gerekiyorsa etiket
-        ekle.
+        {t("question.askDescription")}
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5">

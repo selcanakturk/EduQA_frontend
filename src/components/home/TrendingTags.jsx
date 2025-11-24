@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function TrendingTags({ tags = [], onSelect }) {
+    const { t } = useTranslation();
     if (!tags.length) return null;
 
     return (
@@ -9,14 +12,14 @@ export default function TrendingTags({ tags = [], onSelect }) {
             <div className="flex items-center justify-between">
                 <div>
                     <p className="text-sm font-semibold uppercase tracking-wide text-blue-500">
-                        Popüler Etiketler
+                        {t("home.popularTags")}
                     </p>
                     <h2 className="text-xl font-bold text-slate-900">
-                        Şu sıralar kampüste bunlar konuşuluyor
+                        {t("home.trendingOnCampus")}
                     </h2>
                 </div>
                 <span className="text-sm text-slate-500">
-                    Son 24 saatte {tags[0]?.count ?? 0} kez kullanıldı
+                    {t("home.usedLast24Hours", { count: tags[0]?.count ?? 0 })}
                 </span>
             </div>
             <div className="mt-4 flex flex-wrap gap-3">

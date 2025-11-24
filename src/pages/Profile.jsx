@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-hot-toast";
 import { FiMessageSquare, FiThumbsUp, FiCalendar } from "react-icons/fi";
 import MarkdownEditor from "../components/MarkdownEditor";
+import ErrorFallback from "../components/ErrorFallback";
 import {
   useEditUserMutation,
   useGetProfileQuery,
@@ -29,6 +31,7 @@ import AnswerCard from "../components/AnswerCard";
 import { FiEdit2, FiTrash2, FiX, FiBookmark } from "react-icons/fi";
 
 export default function Profile() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -276,7 +279,7 @@ export default function Profile() {
           </div>
           <div className="flex-1">
             <p className="text-sm uppercase tracking-widest text-white/80">
-              Profil
+              {t("profile.profil")}
             </p>
             <h1 className="text-3xl font-bold tracking-tight">
               {profile.name}
@@ -284,7 +287,7 @@ export default function Profile() {
             <p className="text-white/80">{profile.email}</p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
               <span className="rounded-full bg-white/20 px-4 py-1">
-                {profile.role === "teacher" ? "Öğretmen" : "Öğrenci"}
+                {profile.role === "teacher" ? t("profile.roleTeacher") : t("profile.roleStudent")}
               </span>
               {profile.role === "student" && profile.department && (
                 <span className="rounded-full bg-white/20 px-4 py-1">
@@ -311,7 +314,7 @@ export default function Profile() {
                 : "text-gray-600 hover:text-blue-600"
                 }`}
             >
-              Profil
+              {t("profile.profil")}
             </button>
             <button
               onClick={() => setActiveTab("questions")}
@@ -320,7 +323,7 @@ export default function Profile() {
                 : "text-gray-600 hover:text-blue-600"
                 }`}
             >
-              Sorularım
+              {t("profile.questions")}
             </button>
             <button
               onClick={() => setActiveTab("saved")}
@@ -330,7 +333,7 @@ export default function Profile() {
                 }`}
             >
               <FiBookmark className="h-4 w-4" />
-              Kaydedilenler
+              {t("profile.saved")}
             </button>
           </div>
           {activeTab === "profile" && (
@@ -338,7 +341,7 @@ export default function Profile() {
               onClick={handleToggleEdit}
               className="rounded-full bg-slate-900 px-5 py-2 font-semibold text-white shadow hover:bg-slate-800"
             >
-              {editMode ? "İptal et" : "Profili Düzenle"}
+              {editMode ? t("common.cancel") : t("profile.edit")}
             </button>
           )}
         </div>
@@ -493,16 +496,16 @@ export default function Profile() {
             <div className="rounded-3xl bg-white p-8 text-center shadow">
               <FiMessageSquare className="mx-auto h-12 w-12 text-gray-400" />
               <p className="mt-4 text-lg font-semibold text-gray-900">
-                Henüz soru sormadın
+                {t("profile.noQuestionsYet")}
               </p>
               <p className="mt-2 text-sm text-gray-500">
-                İlk sorunu sorarak topluluğa katkıda bulunabilirsin.
+                {t("profile.noQuestionsYetDescription")}
               </p>
               <Link
                 to="/ask"
                 className="mt-4 inline-block rounded-full bg-blue-600 px-6 py-2 font-semibold text-white transition hover:bg-blue-700"
               >
-                Soru Sor
+                {t("question.ask")}
               </Link>
             </div>
           )}

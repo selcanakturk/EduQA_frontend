@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { FiArrowUpRight, FiBookOpen, FiUsers } from "react-icons/fi";
 
 export default function HeroSection({ user, stats, onAsk }) {
+    const { t } = useTranslation();
+
     return (
         <section className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 p-8 text-white shadow-2xl">
             <div className="relative z-10 grid gap-8 md:grid-cols-[2fr,1fr]">
@@ -9,12 +12,10 @@ export default function HeroSection({ user, stats, onAsk }) {
                         EduQA Campus
                     </p>
                     <h1 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-                        Kampüsün bilgi hazinesine hoş geldin{user ? `, ${user.name}` : ""}.
+                        {t("home.welcomeTitle")}{user ? `, ${user.name}` : ""}.
                     </h1>
                     <p className="mt-4 max-w-2xl text-lg text-blue-100/90">
-                        Derslere dair soru sor, bölüm arkadaşlarının çözümlerini incele,
-                        öğretim görevlilerinden geri bildirim al. Topluluk içinde ne kadar
-                        aktif olursan o kadar görünürsün.
+                        {t("home.welcomeDescription")}
                     </p>
                     <div className="mt-8 flex flex-wrap gap-4">
                         <button
@@ -22,20 +23,20 @@ export default function HeroSection({ user, stats, onAsk }) {
                             onClick={onAsk}
                             className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-blue-700 shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-50"
                         >
-                            Soru Sor
+                            {t("home.askQuestion")}
                             <FiArrowUpRight />
                         </button>
                         <a
                             href="#trending"
                             className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
                         >
-                            Gündemdekiler
+                            {t("home.trending")}
                         </a>
                     </div>
                 </div>
                 <div className="rounded-3xl bg-white/10 p-6 backdrop-blur">
                     <h3 className="text-sm uppercase tracking-wide text-blue-100">
-                        Bu hafta kampüste
+                        {t("home.thisWeekOnCampus")}
                     </h3>
                     <ul className="mt-4 space-y-4 text-white">
                         <li className="flex items-center gap-3 rounded-2xl bg-white/5 p-4">
@@ -46,7 +47,7 @@ export default function HeroSection({ user, stats, onAsk }) {
                                 <p className="text-2xl font-bold">
                                     {stats?.totalQuestions ?? 0}
                                 </p>
-                                <p className="text-sm text-blue-100">Toplam soru</p>
+                                <p className="text-sm text-blue-100">{t("home.totalQuestions")}</p>
                             </div>
                         </li>
                         <li className="flex items-center gap-3 rounded-2xl bg-white/5 p-4">
@@ -57,19 +58,19 @@ export default function HeroSection({ user, stats, onAsk }) {
                                 <p className="text-2xl font-bold">
                                     {stats?.activeContributors ?? 0}
                                 </p>
-                                <p className="text-sm text-blue-100">Aktif katılımcı</p>
+                                <p className="text-sm text-blue-100">{t("home.activeContributors")}</p>
                             </div>
                         </li>
                         <li className="rounded-2xl bg-white/5 p-4 text-sm text-blue-100">
-                            En popüler etiket{" "}
+                            {t("home.mostPopularTag")}{" "}
                             <span className="font-semibold text-white">
                                 {stats?.topTag ?? "react"}
                             </span>{" "}
-                            oldu. Bu hafta{" "}
+                            {t("home.became")}{" "}
                             <span className="font-semibold text-white">
                                 {stats?.answerPerQuestion ?? 0}
                             </span>{" "}
-                            cevap ortalaması yakalandı.
+                            {t("home.answerAverage")}
                         </li>
                     </ul>
                 </div>
