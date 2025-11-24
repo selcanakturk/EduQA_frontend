@@ -7,7 +7,7 @@ export default function TrendingTags({ tags = [], onSelect }) {
     return (
         <section
             id="trending"
-            className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm"
+            className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm animate-fade-in"
         >
             <div className="flex items-center justify-between">
                 <div>
@@ -28,7 +28,7 @@ export default function TrendingTags({ tags = [], onSelect }) {
                         key={tag.name}
                         type="button"
                         onClick={() => onSelect(tag.name)}
-                        className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-200 hover:bg-blue-100"
+                        className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition-all duration-200 hover:border-blue-200 hover:bg-blue-100 hover:scale-105 active:scale-95"
                     >
                         #{tag.name}{" "}
                         <span className="ml-1 text-xs text-blue-400">{tag.count}</span>

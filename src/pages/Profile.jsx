@@ -28,6 +28,8 @@ import {
 } from "../features/bookmarks/bookmarkApi";
 import QuestionCard from "../components/QuestionCard";
 import AnswerCard from "../components/AnswerCard";
+import SkeletonLoader from "../components/SkeletonLoader";
+import ConfirmationModal from "../components/ConfirmationModal";
 import { FiEdit2, FiTrash2, FiX, FiBookmark } from "react-icons/fi";
 
 export default function Profile() {
@@ -77,6 +79,8 @@ export default function Profile() {
   );
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [filesToRemove, setFilesToRemove] = useState([]);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState(null);
 
   const {
     register: registerQuestion,
@@ -465,22 +469,9 @@ export default function Profile() {
                       <FiEdit2 className="h-4 w-4" />
                     </button>
                     <button
-                      onClick={async () => {
-                        if (
-                          window.confirm(
-                            "Bu soruyu silmek istediğine emin misin?"
-                          )
-                        ) {
-                          try {
-                            await deleteQuestion(question._id).unwrap();
-                            toast.success("Soru silindi");
-                            refetchMyQuestions();
-                          } catch (err) {
-                            toast.error(
-                              err?.data?.message || "Soru silinemedi"
-                            );
-                          }
-                        }
+                      onClick={() => {
+                        setQuestionToDelete(question._id);
+                        setShowDeleteConfirm(true);
                       }}
                       disabled={isDeletingQuestion}
                       className="rounded-full bg-red-100 p-2 text-red-600 transition hover:bg-red-200 disabled:opacity-50"
@@ -513,19 +504,23 @@ export default function Profile() {
       )}
 
       {activeTab === "saved" && isOwner && (
-        <div className="space-y-6">
+        <div className="space-y-6 animate-fade-in">
           <div>
             <h3 className="mb-4 text-xl font-bold text-gray-900">
               Kaydedilen Sorular
             </h3>
             {isLoadingSavedQuestions ? (
-              <div className="rounded-3xl bg-white p-6 text-center text-gray-500 shadow">
-                Yükleniyor...
-              </div>
+              <SkeletonLoader type="question" count={3} />
             ) : savedQuestionsData?.data?.length > 0 ? (
               <div className="grid gap-4">
-                {savedQuestionsData.data.map((question) => (
-                  <QuestionCard key={question._id} question={question} />
+                {savedQuestionsData.data.map((question, index) => (
+                  <div
+                    key={question._id}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <QuestionCard question={question} />
+                  </div>
                 ))}
               </div>
             ) : (
@@ -840,6 +835,34 @@ export default function Profile() {
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={showDeleteConfirm}
+        onClose={() => {
+          setShowDeleteConfirm(false);
+          setQuestionToDelete(null);
+        }}
+        onConfirm={async () => {
+          if (questionToDelete) {
+            try {
+              await deleteQuestion(questionToDelete).unwrap();
+              toast.success("Soru silindi");
+              refetchMyQuestions();
+              setShowDeleteConfirm(false);
+              setQuestionToDelete(null);
+            } catch (err) {
+              toast.error(err?.data?.message || "Soru silinemedi");
+            }
+          }
+        }}
+        title={t("profile.deleteQuestionTitle")}
+        message={t("profile.deleteQuestionMessage")}
+        confirmText={t("profile.deleteConfirm")}
+        cancelText={t("common.cancel")}
+        type="danger"
+        isLoading={isDeletingQuestion}
+      />
     </div>
   );
 }

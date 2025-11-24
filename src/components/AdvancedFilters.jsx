@@ -45,7 +45,7 @@ export default function AdvancedFilters({ filters, onFiltersChange, onClear }) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-12 z-20 w-80 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl">
+          <div className="absolute right-0 top-12 z-20 w-80 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl animate-slide-in-right">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900">{t("home.filter")}</h3>
               <button

@@ -14,12 +14,15 @@
         "clear": "Clear",
         "retry": "Retry",
         "home": "Home",
-        "today": "Today",
-        "thisWeek": "This Week",
-        "thisMonth": "This Month",
-        "thisYear": "This Year",
-        "minimum": "Minimum"
-    },
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "thisYear": "This Year",
+    "minimum": "Minimum",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page"
+  },
     "nav": {
         "discover": "Discover",
         "askQuestion": "Ask Question",
@@ -129,7 +132,10 @@
         "noQuestionsYetDescription": "You can contribute to the community by asking your first question.",
         "profil": "Profile",
         "questions": "My Questions",
-        "saved": "Saved"
+        "saved": "Saved",
+        "deleteQuestionTitle": "Delete Question",
+        "deleteQuestionMessage": "Are you sure you want to delete this question? This action cannot be undone.",
+        "deleteConfirm": "Yes, Delete"
     },
     "auth": {
         "login": "Login",

@@ -117,7 +117,7 @@ export default function AskQuestion() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow">
+    <div className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow animate-fade-in">
       <h1 className="text-3xl font-bold text-gray-900">{t("question.ask")}</h1>
       <p className="mt-2 text-gray-600">
         {t("question.askDescription")}

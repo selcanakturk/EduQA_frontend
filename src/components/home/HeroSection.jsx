@@ -5,7 +5,7 @@ export default function HeroSection({ user, stats, onAsk }) {
     const { t } = useTranslation();
 
     return (
-        <section className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 p-8 text-white shadow-2xl">
+        <section className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 p-8 text-white shadow-2xl animate-fade-in">
             <div className="relative z-10 grid gap-8 md:grid-cols-[2fr,1fr]">
                 <div>
                     <p className="text-sm uppercase tracking-[0.3em] text-blue-100">

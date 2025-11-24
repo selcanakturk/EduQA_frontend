@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
     FiCalendar,
@@ -8,6 +8,7 @@ import {
     FiCheckCircle,
 } from "react-icons/fi";
 import MarkdownRenderer from "./MarkdownRenderer";
+import ImageLightbox from "./ImageLightbox";
 
 export default function QuestionCard({ question }) {
     // Markdown'dan plain text çıkar (preview için)
@@ -65,19 +66,31 @@ export default function QuestionCard({ question }) {
 
     const firstImage = imageAttachments.length > 0 ? imageAttachments[0] : null;
     const imageUrl = firstImage ? getFileUrl(firstImage) : null;
+    const [showLightbox, setShowLightbox] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
+
+    const handleImageClick = (e) => {
+        e.preventDefault();
+        if (imageAttachments.length > 0) {
+            const imageUrls = imageAttachments.map((img) => getFileUrl(img));
+            setLightboxIndex(0);
+            setShowLightbox(true);
+        }
+    };
 
     return (
-        <article className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+        <article className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
             <div className="flex gap-4">
                 {imageUrl && (
                     <Link
                         to={`/questions/${_id}`}
                         className="flex-shrink-0"
+                        onClick={handleImageClick}
                     >
                         <img
                             src={imageUrl}
                             alt={title}
-                            className="h-32 w-32 rounded-lg object-cover border border-gray-200"
+                            className="h-32 w-32 rounded-lg object-cover border border-gray-200 cursor-pointer transition hover:opacity-90"
                         />
                     </Link>
                 )}
@@ -136,6 +149,15 @@ export default function QuestionCard({ question }) {
                     </div>
                 </div>
             </div>
+
+            {/* Image Lightbox */}
+            {showLightbox && imageAttachments.length > 0 && (
+                <ImageLightbox
+                    images={imageAttachments.map((img) => getFileUrl(img))}
+                    currentIndex={lightboxIndex}
+                    onClose={() => setShowLightbox(false)}
+                />
+            )}
         </article>
     );
 }

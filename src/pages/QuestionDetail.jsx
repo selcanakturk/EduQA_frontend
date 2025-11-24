@@ -10,6 +10,8 @@ import { selectCurrentUser, setCredentials } from "../features/auth/authSlice";
 import MarkdownEditor from "../components/MarkdownEditor";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 import ErrorFallback from "../components/ErrorFallback";
+import SkeletonLoader from "../components/SkeletonLoader";
+import ImageLightbox from "../components/ImageLightbox";
 import {
     useGetQuestionByIdQuery,
     useLikeQuestionMutation,
@@ -46,6 +48,9 @@ export default function QuestionDetail() {
     } = useGetQuestionByIdQuery(id, { skip: !id });
     const question = data?.data;
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [lightboxImages, setLightboxImages] = useState([]);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
+    const [showLightbox, setShowLightbox] = useState(false);
 
     const [likeQuestion, { isLoading: likeLoading }] = useLikeQuestionMutation();
     const [undoLikeQuestion, { isLoading: undoLoading }] =
@@ -235,8 +240,20 @@ export default function QuestionDetail() {
 
     if (isLoading) {
         return (
-            <div className="rounded bg-white p-6 text-center text-gray-500 shadow">
-                Soru yükleniyor...
+            <div className="space-y-6 animate-fade-in">
+                <div className="animate-pulse rounded-lg bg-white p-6 shadow">
+                    <div className="h-8 w-3/4 rounded bg-gray-200 mb-4" />
+                    <div className="space-y-2 mb-4">
+                        <div className="h-4 w-full rounded bg-gray-200" />
+                        <div className="h-4 w-5/6 rounded bg-gray-200" />
+                        <div className="h-4 w-4/6 rounded bg-gray-200" />
+                    </div>
+                    <div className="flex gap-2">
+                        <div className="h-6 w-20 rounded-full bg-gray-200" />
+                        <div className="h-6 w-16 rounded-full bg-gray-200" />
+                    </div>
+                </div>
+                <SkeletonLoader type="answer" count={3} />
             </div>
         );
     }
@@ -267,7 +284,7 @@ export default function QuestionDetail() {
 
     return (
         <div className="space-y-6">
-            <div className="rounded-lg bg-white p-6 shadow">
+            <div className="animate-fade-in rounded-lg bg-white p-6 shadow">
                 <div className="flex flex-wrap items-center gap-4">
                     {question.solved && (
                         <span className="flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
@@ -298,13 +315,30 @@ export default function QuestionDetail() {
                                 const fileUrl = getFileUrl(file);
                                 const fileName = file.split("/").pop() || `Dosya ${idx + 1}`;
                                 const isImage = /\.(jpg|jpeg|png|gif)$/i.test(fileName);
+
+                                const handleImageClick = (e) => {
+                                    if (isImage && fileUrl) {
+                                        e.preventDefault();
+                                        const imageAttachments = question.attachments
+                                            .map((f) => getFileUrl(f))
+                                            .filter((url, i) => {
+                                                const name = question.attachments[i].split("/").pop() || "";
+                                                return /\.(jpg|jpeg|png|gif)$/i.test(name) && url;
+                                            });
+                                        setLightboxImages(imageAttachments);
+                                        setLightboxIndex(imageAttachments.indexOf(fileUrl));
+                                        setShowLightbox(true);
+                                    }
+                                };
+
                                 return (
                                     <a
                                         key={idx}
                                         href={fileUrl || "#"}
-                                        target="_blank"
+                                        target={isImage ? undefined : "_blank"}
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-100"
+                                        onClick={isImage ? handleImageClick : undefined}
+                                        className={`flex items-center gap-2 rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-100 ${isImage ? "cursor-pointer" : ""}`}
                                     >
                                         {isImage ? (
                                             <img src={fileUrl || ""} alt={fileName} className="h-8 w-8 rounded object-cover" />
@@ -383,7 +417,7 @@ export default function QuestionDetail() {
             </div>
 
             {bestAnswer && (
-                <section className="rounded-lg border border-green-200 bg-green-50 p-5">
+                <section className="animate-scale-in rounded-lg border border-green-200 bg-green-50 p-5">
                     <div className="mb-2 text-sm font-semibold text-green-700">
                         En iyi cevap
                     </div>
@@ -409,8 +443,12 @@ export default function QuestionDetail() {
                         Henüz cevap yok. İlk cevabı sen yaz!
                     </div>
                 )}
-                {regularAnswers.map((answer) => (
-                    <div key={answer._id} className="flex flex-col gap-2">
+                {regularAnswers.map((answer, index) => (
+                    <div
+                        key={answer._id}
+                        className="flex flex-col gap-2 animate-fade-in"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                    >
                         <AnswerCard answer={answer} questionId={id} />
                         {user && (user.id === answer.user?._id || user.id === answer.user?.id) && (
                             <button
@@ -425,7 +463,7 @@ export default function QuestionDetail() {
                 ))}
             </section>
 
-            <section className="rounded-lg bg-white p-6 shadow">
+            <section className="animate-fade-in rounded-lg bg-white p-6 shadow">
                 <h3 className="text-xl font-semibold text-gray-900">Cevap Yaz</h3>
                 {user ? (
                     <form onSubmit={handleSubmit(onSubmitAnswer)} className="mt-4 space-y-4">
@@ -499,6 +537,15 @@ export default function QuestionDetail() {
                     </p>
                 )}
             </section>
+
+            {/* Image Lightbox */}
+            {showLightbox && lightboxImages.length > 0 && (
+                <ImageLightbox
+                    images={lightboxImages}
+                    currentIndex={lightboxIndex}
+                    onClose={() => setShowLightbox(false)}
+                />
+            )}
         </div>
     );
 }

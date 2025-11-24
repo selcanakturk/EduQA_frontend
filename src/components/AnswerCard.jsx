@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FiThumbsUp, FiDownload, FiBookmark } from "react-icons/fi";
 import { selectCurrentUser, setCredentials } from "../features/auth/authSlice";
@@ -12,6 +12,7 @@ import {
 } from "../features/bookmarks/bookmarkApi";
 import { toast } from "react-hot-toast";
 import MarkdownRenderer from "./MarkdownRenderer";
+import ImageLightbox from "./ImageLightbox";
 
 export default function AnswerCard({ answer, questionId }) {
     const dispatch = useDispatch();
@@ -21,6 +22,9 @@ export default function AnswerCard({ answer, questionId }) {
         useUndoLikeAnswerMutation();
     const [saveAnswer, { isLoading: isSavingAnswer }] = useSaveAnswerMutation();
     const [unsaveAnswer, { isLoading: isUnsavingAnswer }] = useUnsaveAnswerMutation();
+    const [lightboxImages, setLightboxImages] = useState([]);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
+    const [showLightbox, setShowLightbox] = useState(false);
 
     const isAnswerSaved = useMemo(() => {
         if (!answer || !user) return false;
@@ -107,7 +111,7 @@ export default function AnswerCard({ answer, questionId }) {
     };
 
     return (
-        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-200">
             <div className="flex items-center justify-between text-sm text-gray-500">
                 <span className="font-semibold text-gray-700">
                     {answer.user?.name || "Anonim"}
@@ -125,13 +129,30 @@ export default function AnswerCard({ answer, questionId }) {
                             const fileUrl = getFileUrl(file);
                             const fileName = file.split("/").pop() || `Dosya ${idx + 1}`;
                             const isImage = /\.(jpg|jpeg|png|gif)$/i.test(fileName);
+
+                            const handleImageClick = (e) => {
+                                if (isImage && fileUrl) {
+                                    e.preventDefault();
+                                    const imageAttachments = answer.attachments
+                                        .map((f) => getFileUrl(f))
+                                        .filter((url, i) => {
+                                            const name = answer.attachments[i].split("/").pop() || "";
+                                            return /\.(jpg|jpeg|png|gif)$/i.test(name) && url;
+                                        });
+                                    setLightboxImages(imageAttachments);
+                                    setLightboxIndex(imageAttachments.indexOf(fileUrl));
+                                    setShowLightbox(true);
+                                }
+                            };
+
                             return (
                                 <a
                                     key={idx}
                                     href={fileUrl || "#"}
-                                    target="_blank"
+                                    target={isImage ? undefined : "_blank"}
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 rounded border border-gray-300 bg-gray-50 px-2 py-1 text-xs text-gray-700 transition hover:bg-gray-100"
+                                    onClick={isImage ? handleImageClick : undefined}
+                                    className={`flex items-center gap-2 rounded border border-gray-300 bg-gray-50 px-2 py-1 text-xs text-gray-700 transition hover:bg-gray-100 ${isImage ? "cursor-pointer" : ""}`}
                                 >
                                     {isImage ? (
                                         <img src={fileUrl || ""} alt={fileName} className="h-6 w-6 rounded object-cover" />
@@ -176,6 +197,15 @@ export default function AnswerCard({ answer, questionId }) {
                     </button>
                 )}
             </div>
+
+            {/* Image Lightbox */}
+            {showLightbox && lightboxImages.length > 0 && (
+                <ImageLightbox
+                    images={lightboxImages}
+                    currentIndex={lightboxIndex}
+                    onClose={() => setShowLightbox(false)}
+                />
+            )}
         </div>
     );
 }

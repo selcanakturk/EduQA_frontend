@@ -31,8 +31,8 @@ export default function AuthModal() {
     }
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 px-4 backdrop-blur-sm">
-            <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 px-4 backdrop-blur-sm animate-fade-in">
+            <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl animate-scale-in">
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-sm uppercase tracking-wide text-blue-500">

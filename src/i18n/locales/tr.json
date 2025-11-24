@@ -14,12 +14,15 @@
         "clear": "Temizle",
         "retry": "Tekrar Dene",
         "home": "Ana Sayfa",
-        "today": "Bugün",
-        "thisWeek": "Bu Hafta",
-        "thisMonth": "Bu Ay",
-        "thisYear": "Bu Yıl",
-        "minimum": "Minimum"
-    },
+    "today": "Bugün",
+    "thisWeek": "Bu Hafta",
+    "thisMonth": "Bu Ay",
+    "thisYear": "Bu Yıl",
+    "minimum": "Minimum",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "page": "Sayfa"
+  },
     "nav": {
         "discover": "Keşfet",
         "askQuestion": "Soru Sor",
@@ -129,7 +132,10 @@
         "noQuestionsYetDescription": "İlk sorunu sorarak topluluğa katkıda bulunabilirsin.",
         "profil": "Profil",
         "questions": "Sorularım",
-        "saved": "Kaydedilenler"
+        "saved": "Kaydedilenler",
+        "deleteQuestionTitle": "Soruyu Sil",
+        "deleteQuestionMessage": "Bu soruyu silmek istediğine emin misin? Bu işlem geri alınamaz.",
+        "deleteConfirm": "Evet, Sil"
     },
     "auth": {
         "login": "Giriş Yap",

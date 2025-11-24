@@ -30,12 +30,13 @@ export default function StatHighlights({ stats }) {
 
     return (
         <section className="grid gap-4 md:grid-cols-3">
-            {cards.map((card) => {
+            {cards.map((card, index) => {
                 const Icon = statIcons[card.key];
                 return (
                     <div
                         key={card.key}
-                        className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+                        className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 animate-fade-in"
+                        style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         <div className="flex items-center gap-3">
                             <div className="rounded-2xl bg-blue-50 p-3 text-blue-600">

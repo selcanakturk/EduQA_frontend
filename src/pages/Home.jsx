@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,8 @@ import TopContributors from "../components/home/TopContributors";
 import EmptyState from "../components/home/EmptyState";
 import ErrorFallback from "../components/ErrorFallback";
 import AdvancedFilters from "../components/AdvancedFilters";
+import Pagination from "../components/Pagination";
+import SkeletonLoader from "../components/SkeletonLoader";
 import { parseApiError } from "../utils/errorHandler";
 
 export default function Home() {
@@ -19,6 +21,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("newest");
   const [activeTag, setActiveTag] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     solved: null,
     dateRange: null,
@@ -28,9 +31,17 @@ export default function Home() {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
 
+  // Reset to page 1 when filters/search/sort changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, sort, activeTag, filters]);
+
   // Build query params
   const queryParams = useMemo(() => {
-    const params = {};
+    const params = {
+      page: currentPage,
+      limit: 10, // Her sayfada 10 soru göster
+    };
     if (activeTag) {
       params.search = activeTag;
     } else if (search) {
@@ -52,11 +63,23 @@ export default function Home() {
       params.minAnswers = filters.minAnswers;
     }
     return params;
-  }, [search, sort, activeTag, filters]);
+  }, [search, sort, activeTag, filters, currentPage]);
 
   const { data, isLoading, isError, error, refetch } = useGetQuestionsQuery(queryParams);
 
   const questions = data?.data || [];
+  const pagination = {
+    currentPage: data?.currentPage || 1,
+    totalPages: data?.totalPages || 1,
+    hasNextPage: data?.hasNextPage || false,
+    hasPrevPage: data?.hasPrevPage || false,
+    total: data?.total || 0,
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const derived = useMemo(() => {
     const tagCounts = {};
@@ -211,11 +234,7 @@ export default function Home() {
             </div>
           </section>
 
-          {isLoading && (
-            <div className="rounded-3xl bg-white p-6 text-center text-gray-500 shadow-sm">
-              {t("home.questionsLoading")}
-            </div>
-          )}
+          {isLoading && <SkeletonLoader type="question" count={5} />}
 
           {isError && (
             <ErrorFallback
@@ -228,11 +247,31 @@ export default function Home() {
             <EmptyState onAsk={handleAskQuestion} />
           )}
 
-          <div className="grid gap-4">
-            {questions.map((question) => (
-              <QuestionCard key={question._id} question={question} />
-            ))}
-          </div>
+          {!isLoading && !isError && questions.length > 0 && (
+            <>
+              <div className="grid gap-4">
+                {questions.map((question, index) => (
+                  <div
+                    key={question._id}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <QuestionCard question={question} />
+                  </div>
+                ))}
+              </div>
+              <div className="animate-fade-in">
+                <Pagination
+                  currentPage={pagination.currentPage}
+                  totalPages={pagination.totalPages}
+                  hasNextPage={pagination.hasNextPage}
+                  hasPrevPage={pagination.hasPrevPage}
+                  onPageChange={handlePageChange}
+                  isLoading={isLoading}
+                />
+              </div>
+            </>
+          )}
         </div>
 
         <div className="space-y-6">

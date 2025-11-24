@@ -67,7 +67,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="relative z-40 bg-white/90 backdrop-blur shadow p-4 flex flex-wrap gap-4 justify-between items-center">
+    <nav className="relative z-40 bg-white/90 backdrop-blur shadow p-4 flex flex-wrap gap-4 justify-between items-center animate-fade-in">
       <Link to="/" className="text-2xl font-black text-blue-600 tracking-tight">
         EduQA<span className="text-slate-900"> Campus</span>
       </Link>
@@ -101,7 +101,7 @@ export default function Navbar() {
                 )}
               </button>
               {showNotifications && (
-                <div className="absolute right-0 top-12 z-[9999] w-80 max-h-96 overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-xl">
+                <div className="absolute right-0 top-12 z-[9999] w-80 max-h-96 overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-xl animate-slide-in-right">
                   <div className="sticky top-0 flex items-center justify-between border-b border-gray-200 bg-white p-4">
                     <h3 className="font-semibold text-gray-900">{t("notifications.title")}</h3>
                     {unreadCount > 0 && (

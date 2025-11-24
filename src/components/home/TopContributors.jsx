@@ -7,7 +7,7 @@ export default function TopContributors({ contributors = [] }) {
     if (!contributors.length) return null;
 
     return (
-        <section className="rounded-3xl border border-amber-100 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm">
+        <section className="rounded-3xl border border-amber-100 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm animate-fade-in">
             <div className="flex items-center gap-2 text-amber-700">
                 <FiAward />
                 <p className="text-sm font-semibold uppercase tracking-wide">
@@ -21,7 +21,8 @@ export default function TopContributors({ contributors = [] }) {
                 {contributors.map((contributor, idx) => (
                     <div
                         key={contributor.id}
-                        className="flex items-center gap-3 rounded-2xl bg-white/70 p-3"
+                        className="flex items-center gap-3 rounded-2xl bg-white/70 p-3 transition-all duration-200 hover:bg-white/90 hover:shadow-md animate-fade-in"
+                        style={{ animationDelay: `${idx * 0.1}s` }}
                     >
                         <span className="text-lg font-bold text-amber-500">{idx + 1}</span>
                         <div className="flex-1">
