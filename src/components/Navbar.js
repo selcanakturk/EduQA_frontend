@@ -82,27 +82,30 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-4 text-sm lg:text-base">
-          <LanguageSwitcher />
+        <div className="hidden md:flex items-center gap-3 lg:gap-4 text-sm lg:text-base">
+          {/* Ana Navigasyon */}
           <Link
             to="/"
-            className="font-semibold text-gray-600 transition hover:text-blue-600"
+            className="font-semibold text-gray-600 transition hover:text-blue-600 whitespace-nowrap"
           >
             {t("nav.discover")}
           </Link>
           <Link
             to="/ask"
-            className="rounded-full border border-blue-200 px-4 py-2 font-semibold text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
+            className="rounded-full border border-blue-200 px-4 py-2 font-semibold text-blue-600 transition hover:border-blue-400 hover:bg-blue-50 whitespace-nowrap"
           >
             {t("nav.askQuestion")}
           </Link>
+
+          {/* Kullanıcı Bilgileri ve Ayarlar */}
           {user ? (
-            <div className="hidden md:flex items-center gap-3">
+            <>
               <div className="relative" ref={notificationRef}>
                 <button
                   type="button"
                   onClick={() => setShowNotifications(!showNotifications)}
                   className="relative rounded-full bg-gray-100 p-2 text-gray-700 transition hover:bg-gray-200"
+                  aria-label="Notifications"
                 >
                   <FiBell className="h-5 w-5" />
                   {unreadCount > 0 && (
@@ -195,29 +198,40 @@ export default function Navbar() {
               </div>
               <Link
                 to={`/profile/${user.id || user._id}`}
-                className="flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700"
+                className="flex items-center gap-2 rounded-full bg-blue-50 px-3 lg:px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 whitespace-nowrap"
               >
-                <FiUser />
+                <FiUser className="h-4 w-4" />
                 <span className="hidden lg:inline">{user.name}</span>
               </Link>
               <button
                 type="button"
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60"
+                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60 whitespace-nowrap"
               >
                 {t("nav.logout")}
               </button>
-            </div>
+              {/* Dil değiştirici - kullanıcı bilgilerinin yanında */}
+              <div className="ml-2 pl-3 border-l border-gray-200">
+                <LanguageSwitcher />
+              </div>
+            </>
           ) : (
-            <button
-              type="button"
-              onClick={() => dispatch(openAuthModal("login"))}
-              className="hidden md:inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700"
-            >
-              <FiUser className="text-white" />
-              {t("nav.myAccount")}
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => dispatch(openAuthModal("login"))}
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 lg:px-5 py-2 font-semibold text-white transition hover:bg-blue-700 whitespace-nowrap"
+              >
+                <FiUser className="h-4 w-4" />
+                <span className="hidden lg:inline">{t("nav.myAccount")}</span>
+                <span className="lg:hidden">{t("nav.login")}</span>
+              </button>
+              {/* Dil değiştirici - login butonunun yanında */}
+              <div className="ml-2 pl-3 border-l border-gray-200">
+                <LanguageSwitcher />
+              </div>
+            </>
           )}
         </div>
 
@@ -240,28 +254,28 @@ export default function Navbar() {
       {showMobileMenu && (
         <div
           ref={mobileMenuRef}
-          className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3 animate-fade-in"
+          className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-2 animate-fade-in"
         >
-          <div className="flex items-center justify-between mb-3">
-            <LanguageSwitcher />
-          </div>
+          {/* Ana Navigasyon */}
           <Link
             to="/"
             onClick={() => setShowMobileMenu(false)}
-            className="block px-4 py-2 font-semibold text-gray-600 transition hover:text-blue-600 hover:bg-blue-50 rounded-lg"
+            className="block px-4 py-2.5 font-semibold text-gray-600 transition hover:text-blue-600 hover:bg-blue-50 rounded-lg"
           >
             {t("nav.discover")}
           </Link>
           <Link
             to="/ask"
             onClick={() => setShowMobileMenu(false)}
-            className="block px-4 py-2 rounded-lg border border-blue-200 font-semibold text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
+            className="block px-4 py-2.5 rounded-lg border border-blue-200 font-semibold text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
           >
             {t("nav.askQuestion")}
           </Link>
+
+          {/* Kullanıcı Bilgileri ve Ayarlar */}
           {user ? (
             <>
-              <div className="relative pt-3 border-t border-gray-200">
+              <div className="relative pt-2 border-t border-gray-200">
                 <button
                   type="button"
                   onClick={() => {
@@ -381,19 +395,29 @@ export default function Navbar() {
               >
                 {t("nav.logout")}
               </button>
+              {/* Dil değiştirici - mobil menüde en altta */}
+              <div className="pt-2 border-t border-gray-200">
+                <LanguageSwitcher />
+              </div>
             </>
           ) : (
-            <button
-              type="button"
-              onClick={() => {
-                dispatch(openAuthModal("login"));
-                setShowMobileMenu(false);
-              }}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700"
-            >
-              <FiUser className="text-white" />
-              {t("nav.myAccount")}
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(openAuthModal("login"));
+                  setShowMobileMenu(false);
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700"
+              >
+                <FiUser className="text-white" />
+                {t("nav.myAccount")}
+              </button>
+              {/* Dil değiştirici - mobil menüde en altta */}
+              <div className="pt-2 border-t border-gray-200">
+                <LanguageSwitcher />
+              </div>
+            </>
           )}
         </div>
       )}
