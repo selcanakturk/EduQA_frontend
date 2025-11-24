@@ -1,0 +1,163 @@
+0 verbose cli /Users/selcanakturk/.nvm/versions/node/v24.11.0/bin/node /Users/selcanakturk/.nvm/versions/node/v24.11.0/bin/npm
+1 info using npm@11.6.1
+2 info using node@v24.11.0
+3 silly config load:file:/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/selcanakturk/Documents/Modern Web Geliştirme Kursu/NodeJS/eduqa_frontend/.npmrc
+5 silly config load:file:/Users/selcanakturk/.npmrc
+6 silly config load:file:/Users/selcanakturk/.nvm/versions/node/v24.11.0/etc/npmrc
+7 verbose title npm install @reduxjs/toolkit react-redux @hookform/resolvers react-hook-form zod react-hot-toast @reduxjs/toolkit-query react-icons
+8 verbose argv "install" "@reduxjs/toolkit" "react-redux" "@hookform/resolvers" "react-hook-form" "zod" "react-hot-toast" "@reduxjs/toolkit-query" "react-icons"
+9 verbose logfile logs-max:10 dir:/Users/selcanakturk/Documents/Modern Web Geliştirme Kursu/NodeJS/eduqa_frontend/.npm-cache/_logs/2025-11-20T10_56_03_294Z-
+10 verbose logfile /Users/selcanakturk/Documents/Modern Web Geliştirme Kursu/NodeJS/eduqa_frontend/.npm-cache/_logs/2025-11-20T10_56_03_294Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @reduxjs/toolkit@*
+15 silly packumentCache full:https://registry.npmjs.org/@reduxjs%2ftoolkit cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/npm 594ms
+17 http fetch GET 200 https://registry.npmjs.org/@reduxjs%2ftoolkit 270ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/@reduxjs%2ftoolkit set size:undefined disposed:false
+19 silly fetch manifest react@^19.2.0
+20 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/react 106ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/react set size:undefined disposed:false
+23 silly fetch manifest react-redux@*
+24 silly packumentCache full:https://registry.npmjs.org/react-redux cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/react-redux 27ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/react-redux set size:undefined disposed:false
+27 silly fetch manifest @types/react@^18.2.25 || ^19
+28 silly packumentCache full:https://registry.npmjs.org/@types%2freact cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/@types%2freact 56ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/@types%2freact set size:undefined disposed:false
+31 silly fetch manifest redux@^5.0.0
+32 silly packumentCache full:https://registry.npmjs.org/redux cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/redux 173ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/redux set size:undefined disposed:false
+35 silly fetch manifest @hookform/resolvers@*
+36 silly packumentCache full:https://registry.npmjs.org/@hookform%2fresolvers cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/@hookform%2fresolvers 107ms (cache miss)
+38 silly packumentCache full:https://registry.npmjs.org/@hookform%2fresolvers set size:undefined disposed:false
+39 silly fetch manifest react-hook-form@*
+40 silly packumentCache full:https://registry.npmjs.org/react-hook-form cache-miss
+41 http fetch GET 200 https://registry.npmjs.org/react-hook-form 77ms (cache miss)
+42 silly packumentCache full:https://registry.npmjs.org/react-hook-form set size:undefined disposed:false
+43 silly fetch manifest zod@*
+44 silly packumentCache full:https://registry.npmjs.org/zod cache-miss
+45 http fetch GET 200 https://registry.npmjs.org/zod 134ms (cache miss)
+46 silly packumentCache full:https://registry.npmjs.org/zod set size:undefined disposed:false
+47 silly fetch manifest react-hot-toast@*
+48 silly packumentCache full:https://registry.npmjs.org/react-hot-toast cache-miss
+49 http fetch GET 200 https://registry.npmjs.org/react-hot-toast 24ms (cache miss)
+50 silly packumentCache full:https://registry.npmjs.org/react-hot-toast set size:undefined disposed:false
+51 silly fetch manifest react-dom@^19.2.0
+52 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+53 http fetch GET 200 https://registry.npmjs.org/react-dom 105ms (cache miss)
+54 silly packumentCache full:https://registry.npmjs.org/react-dom set size:undefined disposed:false
+55 silly fetch manifest @reduxjs/toolkit-query@*
+56 silly packumentCache full:https://registry.npmjs.org/@reduxjs%2ftoolkit-query cache-miss
+57 http fetch GET 404 https://registry.npmjs.org/@reduxjs%2ftoolkit-query 26ms (cache skip)
+58 silly fetch manifest react-icons@*
+59 silly packumentCache full:https://registry.npmjs.org/react-icons cache-miss
+60 http fetch GET 200 https://registry.npmjs.org/react-icons 33ms (cache miss)
+61 silly packumentCache full:https://registry.npmjs.org/react-icons set size:undefined disposed:false
+62 silly placeDep ROOT @hookform/resolvers@5.2.2 OK for: eduqa_frontend@0.1.0 want: *
+63 silly placeDep ROOT react-hook-form@7.66.1 OK for: @hookform/resolvers@5.2.2 want: ^7.55.0
+64 silly placeDep ROOT @reduxjs/toolkit@2.10.1 OK for: eduqa_frontend@0.1.0 want: *
+65 silly placeDep ROOT @reduxjs/toolkit-query@ OK for: eduqa_frontend@0.1.0 want: *
+66 silly placeDep ROOT react-hook-form@7.66.1 REPLACE for: eduqa_frontend@0.1.0 want: *
+67 silly placeDep ROOT react-hot-toast@2.6.0 OK for: eduqa_frontend@0.1.0 want: *
+68 silly placeDep ROOT react-icons@5.5.0 OK for: eduqa_frontend@0.1.0 want: *
+69 silly placeDep ROOT react-redux@9.2.0 OK for: eduqa_frontend@0.1.0 want: *
+70 silly placeDep ROOT zod@4.1.12 OK for: eduqa_frontend@0.1.0 want: *
+71 silly fetch manifest @standard-schema/utils@^0.3.0
+72 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils cache-miss
+73 silly fetch manifest @standard-schema/spec@^1.0.0
+74 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec cache-miss
+75 silly fetch manifest @standard-schema/utils@^0.3.0
+76 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils cache-miss
+77 silly fetch manifest immer@^10.2.0
+78 silly packumentCache full:https://registry.npmjs.org/immer cache-miss
+79 silly fetch manifest redux@^5.0.1
+80 silly packumentCache full:https://registry.npmjs.org/redux cache-miss
+81 silly fetch manifest redux-thunk@^3.1.0
+82 silly packumentCache full:https://registry.npmjs.org/redux-thunk cache-miss
+83 silly fetch manifest reselect@^5.1.0
+84 silly packumentCache full:https://registry.npmjs.org/reselect cache-miss
+85 silly fetch manifest csstype@^3.1.3
+86 silly packumentCache full:https://registry.npmjs.org/csstype cache-miss
+87 silly fetch manifest goober@^2.1.16
+88 silly packumentCache full:https://registry.npmjs.org/goober cache-miss
+89 silly fetch manifest @types/use-sync-external-store@^0.0.6
+90 silly packumentCache full:https://registry.npmjs.org/@types%2fuse-sync-external-store cache-miss
+91 http cache https://registry.npmjs.org/redux 11ms (cache hit)
+92 silly packumentCache full:https://registry.npmjs.org/redux set size:553833 disposed:false
+93 silly fetch manifest use-sync-external-store@^1.4.0
+94 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store cache-miss
+95 http fetch GET 200 https://registry.npmjs.org/csstype 66ms (cache miss)
+96 silly packumentCache full:https://registry.npmjs.org/csstype set size:undefined disposed:false
+97 http fetch GET 200 https://registry.npmjs.org/use-sync-external-store 101ms (cache miss)
+98 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store set size:undefined disposed:false
+99 http fetch GET 200 https://registry.npmjs.org/immer 131ms (cache miss)
+100 silly packumentCache full:https://registry.npmjs.org/immer set size:undefined disposed:false
+101 http fetch GET 200 https://registry.npmjs.org/goober 137ms (cache miss)
+102 silly packumentCache full:https://registry.npmjs.org/goober set size:undefined disposed:false
+103 http fetch GET 200 https://registry.npmjs.org/redux-thunk 143ms (cache miss)
+104 silly packumentCache full:https://registry.npmjs.org/redux-thunk set size:undefined disposed:false
+105 http fetch GET 200 https://registry.npmjs.org/@types%2fuse-sync-external-store 153ms (cache miss)
+106 silly packumentCache full:https://registry.npmjs.org/@types%2fuse-sync-external-store set size:undefined disposed:false
+107 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2fspec 186ms (cache miss)
+108 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec set size:undefined disposed:false
+109 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2futils 224ms (cache miss)
+110 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils set size:undefined disposed:false
+111 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2futils 237ms (cache miss)
+112 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils set size:undefined disposed:false
+113 http fetch GET 200 https://registry.npmjs.org/reselect 666ms (cache miss)
+114 silly packumentCache full:https://registry.npmjs.org/reselect set size:undefined disposed:false
+115 silly placeDep ROOT @standard-schema/utils@0.3.0 OK for: @hookform/resolvers@5.2.2 want: ^0.3.0
+116 silly placeDep ROOT @standard-schema/spec@1.0.0 OK for: @reduxjs/toolkit@2.10.1 want: ^1.0.0
+117 silly placeDep node_modules/@reduxjs/toolkit immer@10.2.0 OK for: @reduxjs/toolkit@2.10.1 want: ^10.2.0
+118 silly placeDep ROOT redux@5.0.1 OK for: @reduxjs/toolkit@2.10.1 want: ^5.0.1
+119 silly placeDep ROOT redux-thunk@3.1.0 OK for: @reduxjs/toolkit@2.10.1 want: ^3.1.0
+120 silly placeDep ROOT reselect@5.1.1 OK for: @reduxjs/toolkit@2.10.1 want: ^5.1.0
+121 silly placeDep ROOT csstype@3.2.3 OK for: react-hot-toast@2.6.0 want: ^3.1.3
+122 silly placeDep ROOT goober@2.1.18 OK for: react-hot-toast@2.6.0 want: ^2.1.16
+123 silly fetch manifest react@^18.0 || ^19
+124 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+125 http cache https://registry.npmjs.org/react 10ms (cache hit)
+126 silly packumentCache full:https://registry.npmjs.org/react set size:6275968 disposed:false
+127 silly placeDep ROOT @types/use-sync-external-store@0.0.6 OK for: react-redux@9.2.0 want: ^0.0.6
+128 silly placeDep ROOT use-sync-external-store@1.6.0 OK for: react-redux@9.2.0 want: ^1.4.0
+129 verbose stack HttpErrorGeneral: 404 Not Found - GET https://registry.npmjs.org/@reduxjs%2ftoolkit-query - Not found
+129 verbose stack     at /Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/npm-registry-fetch/lib/check-response.js:103:15
+129 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+129 verbose stack     at async RegistryFetcher.packument (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/pacote/lib/registry.js:90:19)
+129 verbose stack     at async RegistryFetcher.manifest (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/pacote/lib/registry.js:128:23)
+129 verbose stack     at async #fetchManifest (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1214:20)
+129 verbose stack     at async #nodeFromEdge (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1052:19)
+129 verbose stack     at async #buildDepStep (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:916:11)
+129 verbose stack     at async Arborist.buildIdealTree (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:182:7)
+129 verbose stack     at async Promise.all (index 1)
+129 verbose stack     at async Arborist.reify (/Users/selcanakturk/.nvm/versions/node/v24.11.0/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:117:5)
+130 verbose statusCode 404
+131 verbose pkgid @reduxjs/toolkit-query@*
+132 error code E404
+133 error 404 Not Found - GET https://registry.npmjs.org/@reduxjs%2ftoolkit-query - Not found
+134 error 404
+135 error 404  The requested resource '@reduxjs/toolkit-query@*' could not be found or you do not have permission to access it.
+136 error 404
+137 error 404 Note that you can also install from a
+138 error 404 tarball, folder, http url, or git url.
+139 silly unfinished npm timer reify 1763636163451
+140 silly unfinished npm timer reify:loadTrees 1763636163452
+141 verbose cwd /Users/selcanakturk/Documents/Modern Web Geliştirme Kursu/NodeJS/eduqa_frontend
+142 verbose os Darwin 23.6.0
+143 verbose node v24.11.0
+144 verbose npm  v11.6.1
+145 notice
+145 notice New patch version of npm available! 11.6.1 -> 11.6.3
+145 notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.3
+145 notice To update run: npm install -g npm@11.6.3
+145 notice  { force: true, Symbol(proc-log.meta): true }
+146 verbose exit 1
+147 verbose code 1
+148 error A complete log of this run can be found in: /Users/selcanakturk/Documents/Modern Web Geliştirme Kursu/NodeJS/eduqa_frontend/.npm-cache/_logs/2025-11-20T10_56_03_294Z-debug-0.log
